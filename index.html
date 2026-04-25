@@ -211,7 +211,10 @@
     .services-header { text-align: center; margin-bottom: 60px; }
     .services-header .section-sub { margin: 0 auto; }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .services-grid-4 { grid-template-columns: repeat(4, 1fr); gap: 22px; }
+    .services-grid-4 { grid-template-columns: repeat(6, 1fr); gap: 24px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .services-grid-4 .service-card { grid-column: span 2; }
+    .services-grid-4 .service-card:nth-child(4) { grid-column: 2 / span 2; }
+    .services-grid-4 .service-card:nth-child(5) { grid-column: 4 / span 2; }
     .service-card {
       background: var(--white); border-radius: var(--radius);
       padding: 32px 24px; box-shadow: var(--shadow);
@@ -229,6 +232,7 @@
     .service-card:nth-child(2) { border-top-color: var(--blue); }
     .service-card:nth-child(3) { border-top-color: var(--orange); }
     .service-card:nth-child(4) { border-top-color: var(--teal); }
+    .service-card:nth-child(5) { border-top-color: var(--yellow); }
     .service-icon {
       width: 56px; height: 56px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
@@ -238,6 +242,7 @@
     .service-card:nth-child(2) .service-icon { background: rgba(43,179,224,.12); }
     .service-card:nth-child(3) .service-icon { background: rgba(255,138,42,.14); }
     .service-card:nth-child(4) .service-icon { background: rgba(63,189,174,.14); }
+    .service-card:nth-child(5) .service-icon { background: rgba(255,217,61,.25); }
     .service-card h3 { font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--navy); margin-bottom: 10px; }
     .service-card p { font-size: .92rem; color: var(--muted); line-height: 1.65; }
     .service-list { list-style: none; margin-top: 14px; }
@@ -250,6 +255,24 @@
     .service-card:nth-child(2) .service-list li::before { color: var(--blue); }
     .service-card:nth-child(3) .service-list li::before { color: var(--orange); }
     .service-card:nth-child(4) .service-list li::before { color: var(--teal); }
+    .service-card:nth-child(5) .service-list li::before { color: #c9a700; }
+
+    /* Highlight pentru puncte cheie din serviciu */
+    .service-list li.highlight {
+      background: linear-gradient(135deg, rgba(255,217,61,.18), rgba(255,138,42,.12));
+      border: 1.5px solid rgba(255,217,61,.5);
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-top: 6px;
+      font-weight: 700;
+      color: var(--navy);
+      border-bottom: none !important;
+    }
+    .service-list li.highlight::before {
+      content: '★' !important;
+      color: var(--orange) !important;
+      font-size: .85rem !important;
+    }
 
     /* WHY */
     #de-ce-noi {
@@ -727,6 +750,9 @@
     /* RESPONSIVE */
     @media (max-width: 1100px) {
       .services-grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .services-grid-4 .service-card,
+      .services-grid-4 .service-card:nth-child(4),
+      .services-grid-4 .service-card:nth-child(5) { grid-column: auto; }
       .weekly-grid { grid-template-columns: repeat(3, 1fr); }
       .contact-grid { grid-template-columns: repeat(2, 1fr); }
       .nav-phone { display: none; }
@@ -737,6 +763,9 @@
       .hero-logo-wrap { width: 300px; }
       .services-grid, .test-grid { grid-template-columns: 1fr; }
       .services-grid-4 { grid-template-columns: 1fr; }
+      .services-grid-4 .service-card,
+      .services-grid-4 .service-card:nth-child(4),
+      .services-grid-4 .service-card:nth-child(5) { grid-column: auto; }
       .weekly-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr; }
       .why-numbers { grid-template-columns: 1fr 1fr; }
@@ -803,9 +832,9 @@
         <span class="sparkle sp-4">✧</span>
         <span class="sparkle sp-5">✦</span>
 
-        <div class="floating-chip chip-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg> Creativitate</div>
-        <div class="floating-chip chip-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg> Teme făcute!</div>
-        <div class="floating-chip chip-3"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg> Engleză</div>
+        <div class="floating-chip chip-1">🎨 Creativitate</div>
+        <div class="floating-chip chip-2">📚 Teme făcute!</div>
+        <div class="floating-chip chip-3">🌍 Engleză</div>
 
         <div class="hero-logo-wrap">
           <img src="logo.png" alt="Magic Kids Afterschool logo" />
@@ -842,8 +871,8 @@
   <div class="container">
     <div class="services-header">
       <span class="section-label">Ce oferim</span>
-      <h2 class="section-title">Patru programe pentru<br>nevoi diferite</h2>
-      <p class="section-sub">De la afterschool complet până la activități opționale — alegi exact ce are nevoie copilul tău.</p>
+      <h2 class="section-title">Cinci programe pentru<br>nevoi diferite</h2>
+      <p class="section-sub">De la afterschool complet până la cursuri opționale — alegi exact ce are nevoie copilul tău.</p>
     </div>
     <div class="services-grid services-grid-4">
       <div class="service-card">
@@ -867,7 +896,7 @@
           <li>Marți — Dezvoltare Personală</li>
           <li>Miercuri — Art &amp; Craft</li>
           <li>Vineri — Călător prin Lume</li>
-          <li>Incluse în programul afterschool</li>
+          <li class="highlight">Incluse în programul afterschool</li>
         </ul>
       </div>
       <div class="service-card">
@@ -887,11 +916,23 @@
         <h3>Opționale</h3>
         <p>Copilul tău nu este la afterschool? Nicio problemă — poate participa doar la activitățile care îl pasionează.</p>
         <ul class="service-list">
-          <li>Acces fără înscriere completă</li>
+          <li class="highlight">Acces fără înscriere completă</li>
           <li>Plată per activitate</li>
           <li>Engleză, Art &amp; Craft, etc.</li>
           <li>Flexibilitate totală</li>
           <li>Aceeași calitate, alt format</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌍</div>
+        <h3>Doar Limba Engleză</h3>
+        <p>Program dedicat pentru copiii care vor să învețe engleza într-un mediu interactiv și prietenos — fără să fie înscriși la afterschool.</p>
+        <ul class="service-list">
+          <li>Pentru toate vârstele</li>
+          <li>Luni &amp; Joi, după programul școlii</li>
+          <li>Metode interactive prin joc</li>
+          <li>Profesori cu experiență</li>
+          <li class="highlight">Înscriere independentă</li>
         </ul>
       </div>
     </div>
@@ -935,7 +976,7 @@
       <div class="why-numbers">
         <div class="num-card"><div class="big-num">2+</div><p>Ani de experiență</p></div>
         <div class="num-card"><div class="big-num">5h</div><p>Program zilnic</p></div>
-        <div class="num-card"><div class="big-num">4</div><p>Tipuri de programe</p></div>
+        <div class="num-card"><div class="big-num">5</div><p>Tipuri de programe</p></div>
         <div class="num-card"><div class="big-num">98%</div><p>Satisfacție părinți</p></div>
       </div>
     </div>
@@ -977,12 +1018,12 @@
           Programul zilnic — 12:00 până la 17:00
         </div>
         <div class="schedule-body">
-          <div class="schedule-row"><span class="sched-time">12:00</span><span class="sched-activity">Preluare copii de la școală</span><span class="sched-badge badge-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="2"/><path d="m5 22 5-7 5 5"/><path d="m9 13 5-5 5 5-2 4"/><path d="m17 22 5-2-2-5"/></svg> Sosire</span></div>
-          <div class="schedule-row"><span class="sched-time">13:00</span><span class="sched-activity">Masa caldă</span><span class="sched-badge badge-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18"/><path d="M12 11v8a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3v-1.5"/><path d="M3 11a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8"/><path d="M2 21h20"/></svg> Prânz</span></div>
-          <div class="schedule-row"><span class="sched-time">13:00–15:30</span><span class="sched-activity">Sprijin la teme</span><span class="sched-badge badge-red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg> Teme</span></div>
-          <div class="schedule-row"><span class="sched-time">15:45</span><span class="sched-activity">Gustare sănătoasă</span><span class="sched-badge badge-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 5.5C19 7 20.5 9 21 11c-3 1-6-.5-7.5-2-1.5 1.5-4.5 3-7.5 2 .5-2 2-4 3.5-5.5C9 4 12 3 12 3s3 1 5.5 2.5z"/><path d="M12 13c-1.5 1-2 4-2 7"/><circle cx="12" cy="11" r="6"/></svg> Snack</span></div>
-          <div class="schedule-row"><span class="sched-time">16:00</span><span class="sched-activity">Activitate tematică zilnică</span><span class="sched-badge badge-orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg> Activitate</span></div>
-          <div class="schedule-row"><span class="sched-time">17:00</span><span class="sched-activity">Preluare de către părinți</span><span class="sched-badge badge-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21a8 8 0 0 1 13.292-6"/><circle cx="10" cy="8" r="5"/><path d="M19 16v6"/><path d="M22 19h-6"/></svg> Family</span></div>
+          <div class="schedule-row"><span class="sched-time">12:00</span><span class="sched-activity">Preluare copii de la școală</span><span class="sched-badge badge-blue">🚶 Sosire</span></div>
+          <div class="schedule-row"><span class="sched-time">13:00</span><span class="sched-activity">Masa caldă</span><span class="sched-badge badge-yellow">🍲 Prânz</span></div>
+          <div class="schedule-row"><span class="sched-time">13:00–15:30</span><span class="sched-activity">Sprijin la teme</span><span class="sched-badge badge-red">📚 Teme</span></div>
+          <div class="schedule-row"><span class="sched-time">15:45</span><span class="sched-activity">Gustare sănătoasă</span><span class="sched-badge badge-yellow">🍎 Snack</span></div>
+          <div class="schedule-row"><span class="sched-time">16:00</span><span class="sched-activity">Activitate tematică zilnică</span><span class="sched-badge badge-orange">🎨 Activitate</span></div>
+          <div class="schedule-row"><span class="sched-time">17:00</span><span class="sched-activity">Preluare de către părinți</span><span class="sched-badge badge-blue">👪 Family</span></div>
         </div>
       </div>
 
@@ -1071,7 +1112,7 @@
           <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Comunicare permanentă cu părinții</li>
         </ul>
         <a href="#inscriere" class="btn btn-primary" style="font-size:1.1rem;">Rezervă un loc acum →</a>
-        <p class="price-note">Meditațiile la română și matematică sunt disponibile separat, contra cost.</p>
+        <p class="price-note">Meditațiile la română și matematică, precum și programul de Engleză sunt disponibile separat, contra cost.</p>
       </div>
     </div>
   </div>
@@ -1173,7 +1214,7 @@
         <div class="form-group"><label>Email</label><input type="email" placeholder="adresa@email.ro" /></div>
         <div class="form-row">
           <div class="form-group"><label>Clasa copilului *</label><select><option value="">Selectează...</option><option>Clasa pregătitoare (0)</option><option>Clasa I</option><option>Clasa a II-a</option><option>Clasa a III-a</option><option>Clasa a IV-a</option></select></div>
-          <div class="form-group"><label>Ce vă interesează *</label><select><option value="">Selectează...</option><option>Afterschool complet</option><option>Doar activități opționale</option><option>Meditații (română/matematică)</option><option>Nu m-am decis încă</option></select></div>
+          <div class="form-group"><label>Ce vă interesează *</label><select><option value="">Selectează...</option><option>Afterschool complet</option><option>Doar activități opționale</option><option>Doar Limba Engleză</option><option>Meditații (română/matematică)</option><option>Nu m-am decis încă</option></select></div>
         </div>
         <div class="form-group"><label>Mesaj (opțional)</label><textarea rows="3" placeholder="Orice întrebare sau detaliu relevant..."></textarea></div>
         <button class="btn btn-primary" style="width:100%; justify-content:center; font-size:1.05rem; padding:16px;">Trimite cererea de înscriere ✦</button>
