@@ -169,55 +169,47 @@
       width: 460px; max-width: 100%;
       filter: drop-shadow(0 20px 40px rgba(20,37,63,.18));
       cursor: pointer;
-      /* Animație inițială: zoom-in cu bounce. După aceea trece în floating permanent. */
-      animation: logo-entrance 1.4s cubic-bezier(.34, 1.56, .64, 1) both,
-                 logo-float-rotate 6s ease-in-out 1.4s infinite;
+      /* O singură animație care combină entrance-ul (0-1.4s) cu floatingul permanent */
+      animation: logo-entrance-and-float 7.4s ease-in-out 0s 1 forwards;
       transform-origin: center center;
     }
     .hero-logo-wrap img { width: 100%; height: auto; display: block; }
 
-    /* Faza 1: ENTRANCE — logo apare din nimic cu zoom-in & spin */
-    @keyframes logo-entrance {
+    /* Animație unică: entrance scale/rotate + tranziție lină în float-rotate.
+       Folosim un keyframe care durează 7.4s (1.4s entrance + 6s primul ciclu de float). */
+    @keyframes logo-entrance-and-float {
+      /* === ENTRANCE (0-19% = 0-1.4s din 7.4s total) — o singură rotație de la -180° la 0° === */
       0% {
         opacity: 0;
-        transform: scale(0) rotate(-180deg);
+        transform: translateY(0) scale(0) rotate(-180deg);
       }
-      40% {
+      19% {
         opacity: 1;
-        transform: scale(1.15) rotate(15deg);
+        transform: translateY(0) scale(1) rotate(0deg);
       }
-      60% {
-        transform: scale(0.95) rotate(-8deg);
-      }
-      80% {
-        transform: scale(1.05) rotate(4deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-      }
+      /* === FLOAT (19-100%) — tranziție lină din ultima poziție în mișcare permanentă === */
+      39% { transform: translateY(-8px) scale(1) rotate(1.5deg); }
+      59% { transform: translateY(-14px) scale(1) rotate(0deg); }
+      79% { transform: translateY(-8px) scale(1) rotate(-1.5deg); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
 
-    /* Faza 2: FLOAT permanent + ușoară rotație/balansare */
+    /* După prima animație, intră în loop-ul de float infinit */
+    .hero-logo-wrap.float-loop {
+      animation: logo-float-rotate 6s ease-in-out infinite;
+    }
+
+    /* Faza 2: FLOAT permanent + ușoară rotație */
     @keyframes logo-float-rotate {
-      0%,100% {
-        transform: translateY(0) rotate(0deg);
-      }
-      25% {
-        transform: translateY(-8px) rotate(1.5deg);
-      }
-      50% {
-        transform: translateY(-14px) rotate(0deg);
-      }
-      75% {
-        transform: translateY(-8px) rotate(-1.5deg);
-      }
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-8px) rotate(1.5deg); }
+      50% { transform: translateY(-14px) rotate(0deg); }
+      75% { transform: translateY(-8px) rotate(-1.5deg); }
     }
 
     /* Tremor magic - se adaugă temporar via JavaScript la momentul vrajii */
     .hero-logo-wrap.casting {
-      animation: logo-magic-tremor .6s ease-out,
-                 logo-float-rotate 6s ease-in-out .6s infinite;
+      animation: logo-magic-tremor .6s ease-out, logo-float-rotate 6s ease-in-out .6s infinite !important;
     }
     @keyframes logo-magic-tremor {
       0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
@@ -230,17 +222,6 @@
       70%  { transform: translate(-1px, -2px) rotate(-1deg) scale(1.04); }
       80%  { transform: translate(1px, 1px) rotate(1deg) scale(1.02); }
       100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-    }
-
-    /* Hover: logo "trezit" — pulsează puternic */
-    .hero-logo-wrap:hover {
-      animation: logo-hover-pulse 0.5s ease-in-out;
-    }
-    @keyframes logo-hover-pulse {
-      0%   { transform: scale(1) rotate(0deg); }
-      30%  { transform: scale(1.08) rotate(-3deg); }
-      60%  { transform: scale(1.05) rotate(3deg); }
-      100% { transform: scale(1) rotate(0deg); }
     }
 
     /* Aura magică în jurul logo-ului în timpul vrajii */
@@ -1658,6 +1639,17 @@
     });
   } else {
     setTimeout(() => castMagicSpell(true, false), 1500);
+  }
+
+  // După ce se termină animația entrance+float (7.4s), trec logo-ul în loop infinit
+  const logoWrapForLoop = document.querySelector('.hero-logo-wrap');
+  if (logoWrapForLoop) {
+    setTimeout(() => {
+      // Dacă nu e în mijlocul unei vrăji (casting), trec în float-loop infinit
+      if (!logoWrapForLoop.classList.contains('casting')) {
+        logoWrapForLoop.classList.add('float-loop');
+      }
+    }, 7400);
   }
 
   // La PRIMA interacțiune cu pagina, repornim cu sunet
