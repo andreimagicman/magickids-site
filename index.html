@@ -169,34 +169,27 @@
       width: 460px; max-width: 100%;
       filter: drop-shadow(0 20px 40px rgba(20,37,63,.18));
       cursor: pointer;
-      /* O singură animație care combină entrance-ul (0-1.4s) cu floatingul permanent */
-      animation: logo-entrance-and-float 7.4s ease-in-out 0s 1 forwards;
+      /* 2 animații paralele:
+         1. logo-entrance: rulează O DATĂ (1.4s) - face zoom + rotație
+         2. logo-float-rotate: începe după entrance (delay 1.4s), rulează infinit
+         Important: ambele folosesc DOAR transform, deci se compun lin */
+      animation:
+        logo-entrance 1.4s ease-out 0s 1 forwards,
+        logo-float-rotate 6s ease-in-out 1.4s infinite;
       transform-origin: center center;
     }
     .hero-logo-wrap img { width: 100%; height: auto; display: block; }
 
-    /* Animație unică: entrance scale/rotate + tranziție lină în float-rotate.
-       Folosim un keyframe care durează 7.4s (1.4s entrance + 6s primul ciclu de float). */
-    @keyframes logo-entrance-and-float {
-      /* === ENTRANCE (0-19% = 0-1.4s din 7.4s total) — o singură rotație de la -180° la 0° === */
+    /* Faza 1: ENTRANCE — logo apare din nimic cu zoom + o singură rotație lină */
+    @keyframes logo-entrance {
       0% {
         opacity: 0;
         transform: translateY(0) scale(0) rotate(-180deg);
       }
-      19% {
+      100% {
         opacity: 1;
         transform: translateY(0) scale(1) rotate(0deg);
       }
-      /* === FLOAT (19-100%) — tranziție lină din ultima poziție în mișcare permanentă === */
-      39% { transform: translateY(-8px) scale(1) rotate(1.5deg); }
-      59% { transform: translateY(-14px) scale(1) rotate(0deg); }
-      79% { transform: translateY(-8px) scale(1) rotate(-1.5deg); }
-      100% { transform: translateY(0) scale(1) rotate(0deg); }
-    }
-
-    /* După prima animație, intră în loop-ul de float infinit */
-    .hero-logo-wrap.float-loop {
-      animation: logo-float-rotate 6s ease-in-out infinite;
     }
 
     /* Faza 2: FLOAT permanent + ușoară rotație */
@@ -1639,17 +1632,6 @@
     });
   } else {
     setTimeout(() => castMagicSpell(true, false), 1500);
-  }
-
-  // După ce se termină animația entrance+float (7.4s), trec logo-ul în loop infinit
-  const logoWrapForLoop = document.querySelector('.hero-logo-wrap');
-  if (logoWrapForLoop) {
-    setTimeout(() => {
-      // Dacă nu e în mijlocul unei vrăji (casting), trec în float-loop infinit
-      if (!logoWrapForLoop.classList.contains('casting')) {
-        logoWrapForLoop.classList.add('float-loop');
-      }
-    }, 7400);
   }
 
   // La PRIMA interacțiune cu pagina, repornim cu sunet
