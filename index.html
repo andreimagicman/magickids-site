@@ -76,7 +76,22 @@
     .nav-links { display: flex; align-items: center; gap: 32px; }
     .nav-links a { font-weight: 600; color: var(--text); text-decoration: none; font-size: .95rem; transition: color .2s; }
     .nav-links a:hover { color: var(--magenta); }
-    .nav-cta { display: flex; gap: 12px; }
+    .nav-cta { display: flex; gap: 12px; align-items: center; }
+    .nav-phone {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 18px; border-radius: 50px;
+      background: rgba(43,179,224,.10);
+      color: var(--blue);
+      font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .9rem;
+      text-decoration: none;
+      border: 1.5px solid rgba(43,179,224,.20);
+      transition: all .2s;
+    }
+    .nav-phone:hover {
+      background: var(--blue); color: var(--white);
+      border-color: var(--blue);
+      transform: translateY(-2px);
+    }
 
     /* HERO */
     #hero {
@@ -435,6 +450,184 @@
     }
     .price-note { font-size: .85rem; color: var(--muted); margin-top: 18px; font-style: italic; }
 
+    /* CONTACT */
+    #contact-info {
+      padding: 100px 0;
+      background:
+        linear-gradient(135deg, rgba(63,189,174,.05), rgba(43,179,224,.05)),
+        var(--cream);
+    }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .contact-cards { display: flex; flex-direction: column; gap: 14px; margin: 32px 0; }
+    .contact-card {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--white); border-radius: 16px;
+      padding: 18px 22px; box-shadow: var(--shadow);
+      text-decoration: none; color: inherit;
+      border-left: 4px solid var(--blue);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .contact-card:hover { transform: translateX(6px); box-shadow: var(--shadow-lg); }
+    .contact-card-phone { border-left-color: var(--magenta); }
+    .contact-card-email { border-left-color: var(--blue); }
+    .contact-card-address { border-left-color: var(--orange); }
+    .contact-icon {
+      font-size: 1.6rem;
+      width: 48px; height: 48px; flex-shrink: 0;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(43,179,224,.1);
+    }
+    .contact-card-phone .contact-icon { background: rgba(230,59,140,.12); }
+    .contact-card-email .contact-icon { background: rgba(43,179,224,.12); }
+    .contact-card-address .contact-icon { background: rgba(255,138,42,.14); }
+    .contact-label {
+      font-size: .78rem; font-weight: 700;
+      color: var(--muted); text-transform: uppercase;
+      letter-spacing: .08em; margin-bottom: 2px;
+    }
+    .contact-value {
+      font-family: 'Baloo 2', sans-serif; font-weight: 700;
+      font-size: 1.05rem; color: var(--navy); line-height: 1.4;
+    }
+
+    .social-cta {
+      background: rgba(43,179,224,.06);
+      border-radius: 16px; padding: 22px;
+      border: 1.5px dashed rgba(43,179,224,.3);
+    }
+    .social-cta-text { font-size: .92rem; color: var(--text); margin-bottom: 14px; }
+    .social-cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 50px;
+      font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: .9rem;
+      text-decoration: none; color: var(--white);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .social-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .social-btn-fb { background: #1877F2; }
+    .social-btn-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+    /* MAP visual */
+    .contact-visual { display: flex; align-items: center; justify-content: center; }
+    .map-placeholder {
+      position: relative;
+      background: linear-gradient(135deg, var(--magenta), var(--blue), var(--teal));
+      border-radius: 24px;
+      box-shadow: var(--shadow-lg);
+      padding: 4px;
+      width: 100%; max-width: 460px;
+      overflow: hidden;
+    }
+    .map-content {
+      background: var(--white); border-radius: 20px;
+      padding: 50px 32px; text-align: center;
+      position: relative; z-index: 2;
+    }
+    .map-pin {
+      font-size: 4rem; margin-bottom: 16px;
+      animation: bounce-pin 2s ease-in-out infinite;
+    }
+    @keyframes bounce-pin {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-10px); }
+    }
+    .map-content h3 {
+      font-family: 'Baloo 2', sans-serif; font-weight: 800;
+      font-size: 1.4rem; color: var(--navy); margin-bottom: 10px;
+    }
+    .map-content p {
+      font-size: 1rem; color: var(--muted);
+      line-height: 1.6; margin-bottom: 24px;
+    }
+    .map-decorations { position: absolute; inset: 0; pointer-events: none; }
+    .map-deco {
+      position: absolute; color: var(--white); opacity: .5;
+      font-size: 1.5rem; animation: twinkle 2.5s ease-in-out infinite;
+    }
+    .map-deco-1 { top: 12px; left: 14px; animation-delay: 0s; }
+    .map-deco-2 { bottom: 12px; right: 14px; animation-delay: .8s; font-size: 1.2rem; }
+    .map-deco-3 { top: 50%; right: 8px; animation-delay: 1.4s; font-size: 1rem; }
+
+    /* CONTACT INFO */
+    #contact-info { padding: 100px 0; background: var(--white); }
+    .contact-header { text-align: center; margin-bottom: 50px; }
+    .contact-header .section-sub { margin: 0 auto; }
+    .contact-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+      margin-bottom: 40px;
+    }
+    .contact-card {
+      background: var(--cream); border-radius: 20px;
+      padding: 32px 24px; text-align: center;
+      text-decoration: none; color: var(--text);
+      border: 2px solid transparent;
+      transition: all .25s ease;
+      display: flex; flex-direction: column; align-items: center;
+      box-shadow: 0 2px 8px rgba(20,37,63,.04);
+    }
+    .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue);
+    }
+    .contact-icon {
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; margin-bottom: 16px;
+    }
+    .contact-icon-phone    { background: rgba(43,179,224,.15); }
+    .contact-icon-whatsapp { background: rgba(63,189,174,.18); }
+    .contact-icon-location { background: rgba(230,59,140,.15); }
+    .contact-icon-social   { background: rgba(255,138,42,.18); }
+    .contact-label {
+      font-family: 'Baloo 2', sans-serif; font-weight: 700;
+      font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .contact-value {
+      font-family: 'Baloo 2', sans-serif; font-weight: 800;
+      font-size: 1.15rem; color: var(--navy); margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .contact-extra { font-size: .82rem; color: var(--muted); }
+
+    .contact-card-social { gap: 0; }
+    .contact-card-social .contact-extra { margin-top: 12px; }
+    .contact-social-row {
+      display: flex; gap: 8px; margin: 8px 0 4px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .contact-social-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 50px;
+      font-size: .8rem; font-weight: 700; text-decoration: none;
+      transition: transform .2s;
+    }
+    .contact-social-btn:hover { transform: scale(1.05); }
+    .contact-social-fb { background: #1877F2; color: #fff; }
+    .contact-social-ig { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff; }
+
+    /* Map placeholder */
+    .map-placeholder {
+      background: linear-gradient(135deg, rgba(43,179,224,.08), rgba(230,59,140,.06));
+      border: 2px dashed rgba(43,179,224,.3);
+      border-radius: 20px;
+      padding: 32px;
+      display: flex; align-items: center; gap: 24px;
+      max-width: 800px; margin: 0 auto;
+    }
+    .map-placeholder-icon { font-size: 3rem; flex-shrink: 0; }
+    .map-placeholder-text strong {
+      display: block;
+      font-family: 'Baloo 2', sans-serif; font-size: 1.1rem;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    .map-placeholder-text p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
+    .map-placeholder-text a { color: var(--blue); font-weight: 700; text-decoration: none; }
+    .map-placeholder-text a:hover { text-decoration: underline; }
+
     /* CTA */
     #inscriere {
       padding: 100px 0;
@@ -508,9 +701,11 @@
     @media (max-width: 1100px) {
       .services-grid-4 { grid-template-columns: repeat(2, 1fr); }
       .weekly-grid { grid-template-columns: repeat(3, 1fr); }
+      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-phone { display: none; }
     }
     @media (max-width: 900px) {
-      .hero-grid, .why-grid, .program-grid, .cta-box { grid-template-columns: 1fr; }
+      .hero-grid, .why-grid, .program-grid, .cta-box, .contact-grid { grid-template-columns: 1fr; }
       .hero-visual { min-height: 340px; }
       .hero-logo-wrap { width: 300px; }
       .services-grid, .test-grid { grid-template-columns: 1fr; }
@@ -524,9 +719,11 @@
       .nav-logo { height: 54px; }
       .pricing-card { padding: 40px 28px; }
       .price-amount { font-size: 4.5rem; }
+      .map-placeholder { flex-direction: column; text-align: center; gap: 16px; padding: 24px; }
     }
     @media (max-width: 520px) {
       .weekly-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -540,9 +737,14 @@
       <a href="#program">Program</a>
       <a href="#tarif">Tarif</a>
       <a href="#testimoniale">Părinți</a>
+      <a href="#contact-info">Contact</a>
     </div>
     <div class="nav-cta">
-      <a href="#inscriere" class="btn btn-primary">Înscrie-te acum ✦</a>
+      <a href="tel:0760245111" class="nav-phone" aria-label="Sună 0760 245 111">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57a1 1 0 00-1.02.24l-2.2 2.2a15.045 15.045 0 01-6.59-6.59l2.2-2.2c.28-.28.36-.67.24-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/></svg>
+        <span>0760 245 111</span>
+      </a>
+      <a href="#inscriere" class="btn btn-primary">Înscrie-te ✦</a>
     </div>
   </div>
 </nav>
@@ -824,6 +1026,130 @@
   </div>
 </section>
 
+<!-- CONTACT INFO -->
+<section id="contact-info">
+  <div class="container">
+    <div class="contact-header">
+      <span class="section-label">Vino să ne cunoști</span>
+      <h2 class="section-title">Suntem aici, te așteptăm</h2>
+      <p class="section-sub">Sună-ne, scrie-ne sau vino direct la afterschool — îți facem un tur și îți răspundem la toate întrebările.</p>
+    </div>
+    <div class="contact-grid">
+      <a href="tel:0760245111" class="contact-card">
+        <div class="contact-icon contact-icon-phone">📞</div>
+        <div class="contact-label">Sună-ne direct</div>
+        <div class="contact-value">0760 245 111</div>
+        <div class="contact-extra">Răspundem zilnic 12:00–17:00</div>
+      </a>
+      <a href="https://wa.me/40760245111?text=Bună!%20Sunt%20interesat(ă)%20de%20Magic%20Kids%20Afterschool" target="_blank" class="contact-card">
+        <div class="contact-icon contact-icon-whatsapp">💬</div>
+        <div class="contact-label">Scrie pe WhatsApp</div>
+        <div class="contact-value">0760 245 111</div>
+        <div class="contact-extra">Cea mai rapidă cale</div>
+      </a>
+      <a href="https://www.google.com/maps/search/Strada+Par%C3%A2ngului+118,+Novaci" target="_blank" class="contact-card">
+        <div class="contact-icon contact-icon-location">📍</div>
+        <div class="contact-label">Vino la noi</div>
+        <div class="contact-value">Str. Parângului 118</div>
+        <div class="contact-extra">Novaci, jud. Gorj</div>
+      </a>
+      <div class="contact-card contact-card-social">
+        <div class="contact-icon contact-icon-social">✨</div>
+        <div class="contact-label">Urmărește-ne</div>
+        <div class="contact-social-row">
+          <a href="https://www.facebook.com/magickidsafterschool/" target="_blank" class="contact-social-btn contact-social-fb">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/magickidsafterschool" target="_blank" class="contact-social-btn contact-social-ig">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+        </div>
+        <div class="contact-extra">@magickidsafterschool</div>
+      </div>
+    </div>
+
+    <!-- Placeholder hartă -->
+    <div class="map-placeholder">
+      <div class="map-placeholder-icon">🗺️</div>
+      <div class="map-placeholder-text">
+        <strong>Strada Parângului nr. 118, Novaci, jud. Gorj</strong>
+        <p>Hartă interactivă va fi adăugată în curând. Pentru indicații de drum, <a href="https://www.google.com/maps/search/Strada+Par%C3%A2ngului+118,+Novaci" target="_blank">deschide locația în Google Maps</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / VIZITEAZĂ -->
+<section id="contact-info">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <span class="section-label">Vino să ne cunoști</span>
+        <h2 class="section-title">Te așteptăm la Magic Kids</h2>
+        <p class="section-sub">Cea mai bună decizie o iei când ne vizitezi. Vino să vezi spațiul, să cunoști echipa și să simți atmosfera.</p>
+
+        <div class="contact-cards">
+          <a href="tel:+40760245111" class="contact-card contact-card-phone">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Sună-ne direct</div>
+              <div class="contact-value">0760 245 111</div>
+            </div>
+          </a>
+          <a href="mailto:contact@magickidsafterschool.ro" class="contact-card contact-card-email">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Scrie-ne</div>
+              <div class="contact-value">contact@magickidsafterschool.ro</div>
+            </div>
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Strada+Par%C3%A2ngului+118+Novaci+Gorj" target="_blank" rel="noopener" class="contact-card contact-card-address">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Adresa noastră</div>
+              <div class="contact-value">Str. Parângului nr. 118<br>Novaci, jud. Gorj</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="social-cta">
+          <p class="social-cta-text">Urmărește-ne pe rețelele sociale pentru poze, activități și momente magice:</p>
+          <div class="social-cta-buttons">
+            <a href="https://www.facebook.com/magickidsafterschool/" target="_blank" rel="noopener" class="social-btn social-btn-fb">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+            <a href="https://www.instagram.com/magickidsafterschool" target="_blank" rel="noopener" class="social-btn social-btn-ig">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-visual">
+        <div class="map-placeholder">
+          <div class="map-content">
+            <div class="map-pin">📍</div>
+            <h3>Magic Kids Afterschool</h3>
+            <p>Str. Parângului nr. 118<br>Novaci, jud. Gorj</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Strada+Par%C3%A2ngului+118+Novaci+Gorj" target="_blank" rel="noopener" class="btn btn-primary">
+              Vezi pe Google Maps →
+            </a>
+          </div>
+          <div class="map-decorations">
+            <span class="map-deco map-deco-1">✦</span>
+            <span class="map-deco map-deco-2">✧</span>
+            <span class="map-deco map-deco-3">✦</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="inscriere">
   <div class="container">
     <div class="cta-box">
@@ -868,8 +1194,12 @@
         <img src="logo.png" alt="Magic Kids Afterschool" class="footer-logo" />
         <p>Afterschool cu suflet pentru copiii claselor 0–IV. Calitate, nu cantitate — fiecare copil contează.</p>
         <div class="social-links">
-          <a class="social-link" href="#" title="Facebook">f</a>
-          <a class="social-link" href="#" title="Instagram">◎</a>
+          <a class="social-link" href="https://www.facebook.com/magickidsafterschool/" target="_blank" title="Facebook" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a class="social-link" href="https://www.instagram.com/magickidsafterschool" target="_blank" title="Instagram" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
         </div>
       </div>
       <div class="footer-col">
@@ -879,16 +1209,17 @@
           <li><a href="#program">Program</a></li>
           <li><a href="#tarif">Tarif</a></li>
           <li><a href="#testimoniale">Testimoniale</a></li>
+          <li><a href="#contact-info">Contact</a></li>
           <li><a href="#inscriere">Înscriere</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="tel:07xx000000">📞 07xx xxx xxx</a></li>
-          <li><a href="mailto:contact@magickids.ro">✉️ contact@magickids.ro</a></li>
-          <li><a href="#">📍 Adresa ta, oraș</a></li>
-          <li><a href="#">🕛 Luni–Vineri 12–17</a></li>
+          <li><a href="tel:0760245111">📞 0760 245 111</a></li>
+          <li><a href="mailto:contact@magickidsafterschool.ro">✉️ contact@magickidsafterschool.ro</a></li>
+          <li><a href="https://www.google.com/maps/search/Strada+Par%C3%A2ngului+118,+Novaci" target="_blank">📍 Str. Parângului 118, Novaci, Gorj</a></li>
+          <li><a href="#program">🕛 Luni–Vineri 12–17</a></li>
         </ul>
       </div>
     </div>
