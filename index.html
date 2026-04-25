@@ -181,12 +181,10 @@
       0% {
         opacity: 0;
         transform: scale(0) rotate(-180deg);
-        filter: drop-shadow(0 20px 40px rgba(20,37,63,.18)) blur(8px);
       }
       40% {
         opacity: 1;
         transform: scale(1.15) rotate(15deg);
-        filter: drop-shadow(0 20px 40px rgba(20,37,63,.18)) blur(0);
       }
       60% {
         transform: scale(0.95) rotate(-8deg);
@@ -197,7 +195,6 @@
       100% {
         opacity: 1;
         transform: scale(1) rotate(0deg);
-        filter: drop-shadow(0 20px 40px rgba(20,37,63,.18)) blur(0);
       }
     }
 
@@ -312,12 +309,10 @@
       0% {
         opacity: 0;
         transform: translate(var(--dx, 0), var(--dy, 0)) scale(.1) rotate(-180deg);
-        filter: blur(2px);
       }
       20% {
         opacity: 1;
         transform: translate(calc(var(--dx, 0) * .7), calc(var(--dy, 0) * .7)) scale(.6) rotate(-90deg);
-        filter: blur(0);
       }
       75% {
         opacity: 1;
@@ -981,7 +976,7 @@
   <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="hero-badge fade-up"><span class="icon icon-md icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span> Locuri limitate pentru 2024–2025</div>
+        <div class="hero-badge fade-up"><span class="icon icon-md icon-yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span> Locuri limitate pentru 2026–2027</div>
         <h1 class="fade-up delay-1">Unde copiii<br>tăi <em>strălucesc</em><br>în fiecare zi</h1>
         <p class="hero-desc fade-up delay-2">
           La Magic Kids credem în <strong style="color:var(--magenta)">calitate, nu cantitate</strong>. Grupe mici, atenție individuală și un program echilibrat — temele făcute, masa caldă servită, copilul fericit.
@@ -1472,9 +1467,97 @@
   });
 
   // ═══════════════════════════════════════════════
+  // 🔊 SUNET MAGIC — generat cu Web Audio API
+  // ═══════════════════════════════════════════════
+  function playMagicSound() {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+
+      const ctx = new AudioContext();
+      const now = ctx.currentTime;
+
+      // Master gain — volum principal
+      const master = ctx.createGain();
+      master.gain.value = 0.15; // volum moderat, nu agresiv
+      master.connect(ctx.destination);
+
+      // Reverb simulat printr-un filter low-pass + delay
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 8000;
+      filter.connect(master);
+
+      // Scară magică ascendentă: do, mi, sol, do (octava), mi (octava), sol (octava)
+      // Notele formează un acord major arpeggiat — sună "magic"
+      const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98, 2093.00];
+
+      notes.forEach((freq, i) => {
+        const startTime = now + (i * 0.08);
+
+        // Oscillator — tonul de bază
+        const osc = ctx.createOscillator();
+        osc.type = 'sine'; // sunet curat, "cristalin"
+        osc.frequency.value = freq;
+
+        // Envelope — atac rapid, decay lent (efect de clopoțel)
+        const env = ctx.createGain();
+        env.gain.setValueAtTime(0, startTime);
+        env.gain.linearRampToValueAtTime(0.5, startTime + 0.02); // attack 20ms
+        env.gain.exponentialRampToValueAtTime(0.001, startTime + 0.7); // release 700ms
+
+        osc.connect(env);
+        env.connect(filter);
+
+        osc.start(startTime);
+        osc.stop(startTime + 0.7);
+
+        // A doua oscillator un octave deasupra, mai slab — adaugă "shimmer"
+        const osc2 = ctx.createOscillator();
+        osc2.type = 'triangle';
+        osc2.frequency.value = freq * 2;
+
+        const env2 = ctx.createGain();
+        env2.gain.setValueAtTime(0, startTime);
+        env2.gain.linearRampToValueAtTime(0.15, startTime + 0.02);
+        env2.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
+
+        osc2.connect(env2);
+        env2.connect(filter);
+
+        osc2.start(startTime);
+        osc2.stop(startTime + 0.5);
+      });
+
+      // "Sparkle final" — un mic ping luminos la sfârșit
+      setTimeout(() => {
+        const finalOsc = ctx.createOscillator();
+        finalOsc.type = 'sine';
+        finalOsc.frequency.value = 2637; // E7
+
+        const finalEnv = ctx.createGain();
+        const finalNow = ctx.currentTime;
+        finalEnv.gain.setValueAtTime(0, finalNow);
+        finalEnv.gain.linearRampToValueAtTime(0.4, finalNow + 0.01);
+        finalEnv.gain.exponentialRampToValueAtTime(0.001, finalNow + 1.2);
+
+        finalOsc.connect(finalEnv);
+        finalEnv.connect(filter);
+
+        finalOsc.start(finalNow);
+        finalOsc.stop(finalNow + 1.2);
+      }, notes.length * 80);
+
+    } catch (e) {
+      // Browserul nu suportă Web Audio sau utilizatorul a blocat sunetul
+      console.log('Audio not available:', e);
+    }
+  }
+
+  // ═══════════════════════════════════════════════
   // 🪄 ANIMAȚIE DE VRAJĂ — sparkles din baghete
   // ═══════════════════════════════════════════════
-  function castMagicSpell(triggerLogoTremor = false) {
+  function castMagicSpell(triggerLogoTremor = false, withSound = false) {
     const heroVisual = document.querySelector('.hero-visual');
     const logoWrap = document.querySelector('.hero-logo-wrap');
     const sparkles = document.querySelectorAll('.sparkle');
@@ -1482,6 +1565,11 @@
     const glowRight = document.getElementById('wandGlowRight');
 
     if (!heroVisual || !logoWrap || sparkles.length === 0) return;
+
+    // Sunet magic sincronizat cu vraja
+    if (withSound) {
+      playMagicSound();
+    }
 
     // TREMOR magic la logo (sincronizat cu apariția sparkles-urilor)
     if (triggerLogoTremor) {
@@ -1495,7 +1583,6 @@
     const visualRect = heroVisual.getBoundingClientRect();
     const logoRect = logoWrap.getBoundingClientRect();
 
-    // Pozițiile baghetelor în interiorul logo-ului
     const logoOffsetX = logoRect.left - visualRect.left;
     const logoOffsetY = logoRect.top - visualRect.top;
 
@@ -1508,21 +1595,17 @@
       y: logoOffsetY + logoRect.height * 0.70
     };
 
-    // Setăm pozițiile glow-urilor pe baghete
     glowLeft.style.left = wandLeft.x + 'px';
     glowLeft.style.top = wandLeft.y + 'px';
     glowRight.style.left = wandRight.x + 'px';
     glowRight.style.top = wandRight.y + 'px';
 
-    // Curățăm clasele active
     sparkles.forEach(s => { s.classList.remove('cast', 'twinkling'); });
     glowLeft.classList.remove('active');
     glowRight.classList.remove('active');
 
-    // Force reflow ca animațiile să se restarteze
     void heroVisual.offsetWidth;
 
-    // Calculează pentru fiecare sparkle: poziția lui curentă în coordonate relative
     sparkles.forEach((sparkle, i) => {
       const sparkleRect = sparkle.getBoundingClientRect();
       const sparkleX = sparkleRect.left - visualRect.left + sparkleRect.width / 2;
@@ -1552,40 +1635,46 @@
       }, (baseDelay + randomJitter + animDuration) * 1000);
     });
 
-    // Activează glow-ul baghetelor (sincron cu tremorul logo-ului)
     setTimeout(() => {
       glowLeft.classList.add('active');
       glowRight.classList.add('active');
     }, 250);
   }
 
-  // ─── Lansare la încărcare ───
-  // Logo-ul are deja animația de "entrance" (1.4s) - vraja începe DUPĂ ce logo-ul a apărut
-  function startMagicSequence() {
-    // Așteptăm să se termine entrance-ul logo-ului (1.4s) + un moment dramatic
-    setTimeout(() => {
-      castMagicSpell(true); // cu tremor
-    }, 1500);
+  // ─── Lansare la încărcare (O SINGURĂ DATĂ, fără replay) ───
+  // Notă: Sunetul autoplay e blocat de browserele moderne fără interacțiune.
+  // Soluție: declanșăm vraja la prima interacțiune a utilizatorului (click oriunde, scroll, sau mișcare mouse)
+  let spellCast = false;
+  function triggerSpell() {
+    if (spellCast) return;
+    spellCast = true;
+    castMagicSpell(true, true); // tremor + sunet
   }
 
+  // Încercăm autoplay (va merge animația, dar poate nu și sunetul)
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startMagicSequence);
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => castMagicSpell(true, false), 1500); // doar animația, fără sunet
+    });
   } else {
-    startMagicSequence();
+    setTimeout(() => castMagicSpell(true, false), 1500);
   }
 
-  // ─── Re-cast la click pe logo (mai natural decât hover) ───
-  let castInProgress = false;
-  const logoWrapEl = document.querySelector('.hero-logo-wrap');
-  if (logoWrapEl) {
-    logoWrapEl.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (castInProgress) return;
-      castInProgress = true;
-      castMagicSpell(true);
-      setTimeout(() => { castInProgress = false; }, 3500);
-    });
+  // La PRIMA interacțiune cu pagina, repornim cu sunet
+  // (browserele permit sunet doar după click/touch/keydown)
+  let firstInteraction = true;
+  function onFirstInteraction() {
+    if (!firstInteraction) return;
+    firstInteraction = false;
+    // Sunetul magic la prima interacțiune (subtil, nu reia toată animația)
+    playMagicSound();
+    document.removeEventListener('click', onFirstInteraction);
+    document.removeEventListener('keydown', onFirstInteraction);
+    document.removeEventListener('touchstart', onFirstInteraction);
   }
+  document.addEventListener('click', onFirstInteraction);
+  document.addEventListener('keydown', onFirstInteraction);
+  document.addEventListener('touchstart', onFirstInteraction);
 </script>
 </body>
 </html>
