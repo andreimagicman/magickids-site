@@ -1,0 +1,36 @@
+# Magic Kids Afterschool — robots.txt
+# https://magickidsnovaci.ro
+
+User-agent: *
+Allow: /
+
+# Permite explicit AI crawlers (best practice 2026)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Sitemap
+Sitemap: https://magickidsnovaci.ro/sitemap-index.xml
+
+# llms.txt — pentru ghidare AI
+# Vezi: https://magickidsnovaci.ro/llms.txt

@@ -1,0 +1,89 @@
+---
+/**
+ * SEO Component — meta tags pentru fiecare pagină
+ * Conform best practices 2026: title, description, OG, Twitter Cards, canonical
+ */
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = '/og-image.png',
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  author = 'Magic Kids Afterschool',
+  noindex = false,
+} = Astro.props;
+
+// URL absolut pentru OG/Twitter
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const absoluteImage = new URL(image, Astro.site);
+
+// Title pattern: "Pagina | Magic Kids Afterschool Novaci"
+const fullTitle = title.includes('Magic Kids')
+  ? title
+  : `${title} | Magic Kids Afterschool Novaci`;
+---
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<meta name="author" content={author} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Indexare -->
+{noindex ? (
+  <meta name="robots" content="noindex, nofollow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+)}
+
+<!-- Limbă & Geo -->
+<meta name="language" content="Romanian" />
+<meta name="geo.region" content="RO-GJ" />
+<meta name="geo.placename" content="Novaci, Gorj" />
+<meta name="geo.position" content="45.18;23.66" />
+<meta name="ICBM" content="45.18, 23.66" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="ro_RO" />
+<meta property="og:site_name" content="Magic Kids Afterschool" />
+
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+{ogType === 'article' && author && <meta property="article:author" content={author} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImage} />
+
+<!-- Theme color (mobil) -->
+<meta name="theme-color" content="#E63B8C" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="format-detection" content="telephone=yes" />
+
+<!-- DNS prefetch pentru fonturi -->
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

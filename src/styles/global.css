@@ -1,0 +1,177 @@
+/* ═══════════════════════════════════════════════
+   MAGIC KIDS — Stilizare globală
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Paleta inspirată din logo */
+  --blue:     #2BB3E0;
+  --magenta:  #E63B8C;
+  --orange:   #FF8A2A;
+  --yellow:   #FFD93D;
+  --teal:     #3FBDAE;
+  --navy:     #14253F;
+  --cream:    #FFF8F0;
+  --white:    #FFFFFF;
+  --text:     #2A3146;
+  --muted:    #7B8399;
+
+  --radius:   18px;
+  --shadow:   0 8px 32px rgba(20,37,63,.10);
+  --shadow-lg:0 20px 60px rgba(20,37,63,.16);
+
+  --container: 1140px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; height: auto; }
+a { color: inherit; }
+
+/* === UTILITY === */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* === LUCIDE ICONS UTILITY === */
+.icon { display: inline-flex; flex-shrink: 0; vertical-align: middle; }
+.icon svg { width: 100%; height: 100%; display: block; }
+.icon-sm { width: 16px; height: 16px; }
+.icon-md { width: 20px; height: 20px; }
+.icon-lg { width: 24px; height: 24px; }
+.icon-xl { width: 28px; height: 28px; }
+.icon-2xl { width: 36px; height: 36px; }
+.icon-3xl { width: 48px; height: 48px; }
+
+.icon-magenta { color: var(--magenta); }
+.icon-blue    { color: var(--blue); }
+.icon-orange  { color: var(--orange); }
+.icon-yellow  { color: var(--yellow); }
+.icon-teal    { color: var(--teal); }
+.icon-navy    { color: var(--navy); }
+.icon-white   { color: var(--white); }
+.icon-muted   { color: var(--muted); }
+
+/* === BUTOANE === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.btn:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+
+.btn-primary { background: var(--magenta); color: #fff; }
+.btn-outline { background: transparent; border: 2.5px solid var(--blue); color: var(--blue); }
+.btn-yellow  { background: var(--yellow); color: var(--navy); }
+
+/* === LABELS / TITLURI === */
+.section-label {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--navy);
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: .8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 16px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Baloo 2', sans-serif;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+h2.section-title {
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 16px;
+}
+
+p.section-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+/* === ANIMATIONS UTILITY === */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp .7s ease both; }
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .25s; }
+.delay-3 { animation-delay: .4s; }
+.delay-4 { animation-delay: .55s; }
+
+/* === ACCESSIBILITY === */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link pentru tastatură */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--magenta);
+  color: white;
+  padding: 8px 16px;
+  z-index: 9999;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* Reduce motion pentru utilizatori care preferă */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Selecția de text */
+::selection {
+  background: var(--magenta);
+  color: white;
+}

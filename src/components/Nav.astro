@@ -1,0 +1,276 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/servicii/', label: 'Servicii' },
+  { href: '/program/', label: 'Program' },
+  { href: '/tarif/', label: 'Tarif' },
+  { href: '/contact/', label: 'Contact' },
+  { href: '/blog/', label: 'Blog' },
+];
+
+function isActive(path: string) {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+}
+---
+
+<nav id="mainNav" aria-label="Meniu principal">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="/" aria-label="Magic Kids Afterschool — pagina principală">
+      <img src="/logo.png" alt="Magic Kids Afterschool" width="64" height="64" />
+    </a>
+
+    <button
+      class="nav-toggle"
+      id="navToggle"
+      aria-label="Deschide meniul"
+      aria-expanded="false"
+      aria-controls="navMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <ul class="nav-links" role="list">
+        {links.map(({ href, label }) => (
+          <li>
+            <a href={href} class:list={[{ active: isActive(href) }]} aria-current={isActive(href) ? 'page' : undefined}>
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="nav-cta">
+        <a href="tel:0760245111" class="nav-phone" aria-label="Sună la 0760 245 111">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          0760 245 111
+        </a>
+        <a href="/contact/#inscriere" class="btn btn-primary nav-cta-btn">Înscrie-te ✦</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255, 248, 240, .92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1.5px solid rgba(43, 179, 224, .15);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled {
+    box-shadow: 0 8px 32px rgba(20, 37, 63, .10);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 64px;
+    transition: transform .2s;
+    z-index: 110;
+  }
+  .nav-logo:hover { transform: scale(1.05); }
+  .nav-logo img { height: 100%; width: auto; }
+
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    font-size: .95rem;
+    transition: color .2s;
+    padding: 4px 0;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 50%; bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--magenta);
+    transition: width .25s, left .25s;
+  }
+  .nav-links a:hover { color: var(--magenta); }
+  .nav-links a:hover::after { width: 100%; left: 0; }
+  .nav-links a.active { color: var(--magenta); }
+  .nav-links a.active::after { width: 100%; left: 0; }
+
+  .nav-cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .nav-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    background: rgba(43, 179, 224, .10);
+    color: var(--blue);
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .9rem;
+    text-decoration: none;
+    border: 1.5px solid rgba(43, 179, 224, .20);
+    transition: all .2s;
+  }
+  .nav-phone:hover {
+    background: var(--blue);
+    color: var(--white);
+    border-color: var(--blue);
+    transform: translateY(-2px);
+  }
+  .nav-cta-btn { padding: 10px 20px; font-size: .9rem; }
+
+  /* Hamburger pentru mobil */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 3px;
+    background: var(--navy);
+    border-radius: 2px;
+    transition: all .3s;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(9.5px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-9.5px) rotate(-45deg);
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .nav-phone { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    .nav-toggle { display: flex; }
+
+    .nav-menu {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: min(85vw, 380px);
+      background: var(--white);
+      flex-direction: column;
+      justify-content: center;
+      gap: 32px;
+      padding: 80px 32px 32px;
+      box-shadow: -10px 0 40px rgba(0,0,0,.15);
+      transform: translateX(100%);
+      transition: transform .35s ease;
+    }
+    .nav-menu.open {
+      transform: translateX(0);
+    }
+
+    .nav-links {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      width: 100%;
+    }
+    .nav-links a {
+      font-size: 1.2rem;
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 700;
+    }
+
+    .nav-cta {
+      flex-direction: column;
+      width: 100%;
+      gap: 14px;
+      align-items: stretch;
+    }
+    .nav-phone {
+      display: inline-flex;
+      justify-content: center;
+      font-size: 1rem;
+      padding: 14px 20px;
+    }
+    .nav-cta-btn {
+      justify-content: center;
+      padding: 14px 20px;
+      font-size: 1rem;
+    }
+
+    .nav-logo { height: 54px; }
+    .nav-inner { height: 70px; }
+  }
+</style>
+
+<script>
+  // Shadow pe scroll
+  const nav = document.getElementById('mainNav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+  }
+
+  // Toggle mobil
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navMenu');
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Închide meniul' : 'Deschide meniul');
+      // Prevent scroll când e deschis
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Închidem meniul când se face click pe un link
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+</script>

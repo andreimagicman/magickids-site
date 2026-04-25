@@ -1,0 +1,204 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, publishDate, updatedDate, author, tags, image, imageAlt } = post.data;
+
+const formattedDate = publishDate.toLocaleDateString('ro-RO', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const breadcrumbs = [
+  { name: 'Acasă', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+  { name: title, url: `/blog/${post.id}/` },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pageName={title}
+  ogType="article"
+  ogImage={image}
+  breadcrumbs={breadcrumbs}>
+
+  <article class="blog-post">
+    <div class="container container-narrow">
+      <nav class="breadcrumbs" aria-label="Cale de navigare">
+        <a href="/">Acasă</a>
+        <span aria-hidden="true">›</span>
+        <a href="/blog/">Blog</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">{title}</span>
+      </nav>
+
+      <header class="post-header">
+        {tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map(tag => <span class="post-tag">#{tag}</span>)}
+          </div>
+        )}
+        <h1>{title}</h1>
+        <p class="post-description">{description}</p>
+        <div class="post-meta">
+          <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+          <span aria-hidden="true">•</span>
+          <span>{author}</span>
+        </div>
+      </header>
+
+      {image && (
+        <div class="post-cover">
+          <img src={image} alt={imageAlt || title} loading="eager" />
+        </div>
+      )}
+
+      <div class="post-content">
+        <slot />
+      </div>
+
+      <footer class="post-footer">
+        <a href="/blog/" class="back-to-blog">← Înapoi la Blog</a>
+      </footer>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    padding: 130px 0 80px;
+    background: var(--cream);
+  }
+  .container-narrow {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    font-size: .85rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .breadcrumbs a { color: var(--magenta); text-decoration: none; }
+  .breadcrumbs a:hover { text-decoration: underline; }
+
+  .post-header { margin-bottom: 40px; }
+  .post-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .post-tag {
+    background: rgba(43,179,224,.12);
+    color: var(--blue);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: 600;
+  }
+  .post-header h1 {
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--navy);
+  }
+  .post-description {
+    font-size: 1.15rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .post-meta {
+    display: flex;
+    gap: 12px;
+    font-size: .9rem;
+    color: var(--muted);
+  }
+
+  .post-cover {
+    margin: 0 -24px 40px;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .post-cover img {
+    width: 100%;
+    height: auto;
+  }
+
+  .post-content {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .post-content :global(h2) {
+    font-weight: 800;
+    font-size: 1.8rem;
+    margin: 40px 0 16px;
+    color: var(--navy);
+  }
+  .post-content :global(h3) {
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin: 32px 0 12px;
+    color: var(--navy);
+  }
+  .post-content :global(p) {
+    margin-bottom: 20px;
+  }
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin: 0 0 20px 24px;
+  }
+  .post-content :global(li) {
+    margin-bottom: 8px;
+  }
+  .post-content :global(a) {
+    color: var(--magenta);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .post-content :global(blockquote) {
+    border-left: 4px solid var(--magenta);
+    padding: 12px 20px;
+    margin: 24px 0;
+    background: rgba(230,59,140,.05);
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    color: var(--text);
+  }
+  .post-content :global(strong) { color: var(--navy); }
+  .post-content :global(img) {
+    border-radius: var(--radius);
+    margin: 24px 0;
+  }
+
+  .post-footer {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,.08);
+  }
+  .back-to-blog {
+    color: var(--magenta);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .back-to-blog:hover { text-decoration: underline; }
+
+  @media (max-width: 700px) {
+    .post-cover { margin: 0 0 30px; }
+  }
+</style>

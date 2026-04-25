@@ -1,0 +1,329 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Acasă', url: '/' },
+  { name: 'Servicii', url: '/servicii/' },
+];
+---
+
+<BaseLayout
+  title="Cele 5 programe Magic Kids — Afterschool, meditații, engleză, opționale"
+  description="Cele 5 programe oferite de Magic Kids Afterschool Novaci: afterschool complet (1.350 lei/an), activități tematice incluse (engleză, dezvoltare personală, art & craft), meditații separate la română și matematică, doar engleză pentru toate vârstele și activități opționale fără înscriere completă."
+  pageName="Servicii"
+  pageType="Service"
+  serviceName="Programe educaționale Magic Kids"
+  serviceDescription="5 programe educaționale pentru clasele 0-IV: afterschool complet, activități tematice, meditații, doar engleză și opționale."
+  breadcrumbs={breadcrumbs}>
+
+  <!-- HEADER -->
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Cale de navigare">
+        <a href="/">Acasă</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Servicii</span>
+      </nav>
+      <span class="section-label">Ce oferim</span>
+      <h1>Cinci programe pentru<br />nevoi diferite</h1>
+      <p class="page-hero-desc">De la afterschool complet până la cursuri opționale — alegi exact ce are nevoie copilul tău.</p>
+    </div>
+  </section>
+
+  <!-- SERVICII -->
+  <section id="servicii">
+    <div class="container">
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">🎒</div>
+          <h2>Afterschool Complet</h2>
+          <p>Programul nostru de bază: copilul tău este în siguranță, hrănit, ajutat la teme și implicat în activități zilnice.</p>
+          <ul class="service-list">
+            <li>Preluare copii din oraș</li>
+            <li>Masă caldă la prânz</li>
+            <li>Sprijin la teme zilnice</li>
+            <li>Gustare sănătoasă după-amiază</li>
+            <li>Activitate tematică în fiecare zi</li>
+          </ul>
+          <a href="/tarif/" class="service-cta">Vezi tariful →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">🌟</div>
+          <h2>Activități Tematice</h2>
+          <p>Cinci zile, cinci experiențe diferite — fiecare zi aduce ceva nou pentru curiozitatea copilului tău.</p>
+          <ul class="service-list">
+            <li>Luni &amp; Joi — Engleză</li>
+            <li>Marți — Dezvoltare Personală</li>
+            <li>Miercuri — Art &amp; Craft</li>
+            <li>Vineri — Călător prin Lume</li>
+            <li class="highlight">Incluse în programul afterschool</li>
+          </ul>
+          <a href="/program/" class="service-cta">Vezi programul →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">📚</div>
+          <h2>Meditații</h2>
+          <p>Pregătire serioasă la română și matematică, pentru rezultate excelente la școală și concursuri.</p>
+          <ul class="service-list">
+            <li>Română &amp; Matematică</li>
+            <li>Pregătire Evaluare Națională</li>
+            <li>Pregătire pentru concursuri</li>
+            <li>Pentru clasele 0–4</li>
+            <li>Profesori cu experiență</li>
+          </ul>
+          <a href="/contact/" class="service-cta">Întreabă →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">✨</div>
+          <h2>Opționale</h2>
+          <p>Copilul tău nu este la afterschool? Nicio problemă — poate participa doar la activitățile care îl pasionează.</p>
+          <ul class="service-list">
+            <li class="highlight">Acces fără înscriere completă</li>
+            <li>Plată per activitate</li>
+            <li>Engleză, Art &amp; Craft, etc.</li>
+            <li>Flexibilitate totală</li>
+            <li>Aceeași calitate, alt format</li>
+          </ul>
+          <a href="/contact/" class="service-cta">Întreabă →</a>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">🌍</div>
+          <h2>Doar Limba Engleză</h2>
+          <p>Program dedicat pentru copiii care vor să învețe engleza într-un mediu interactiv și prietenos — fără să fie înscriși la afterschool.</p>
+          <ul class="service-list">
+            <li>Pentru toate vârstele</li>
+            <li>Luni &amp; Joi, după programul școlii</li>
+            <li>Metode interactive prin joc</li>
+            <li>Profesori cu experiență</li>
+            <li class="highlight">Înscriere independentă</li>
+          </ul>
+          <a href="/contact/" class="service-cta">Întreabă →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA jos -->
+  <section class="bottom-cta">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Nu știi ce program e potrivit pentru copilul tău?</h2>
+        <p>Sună-ne la 0760 245 111 sau completează formularul. Te ajutăm să alegi.</p>
+        <div class="cta-buttons">
+          <a href="tel:0760245111" class="btn btn-primary">Sună acum</a>
+          <a href="/contact/" class="btn btn-outline">Formular contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* PAGE HERO */
+  .page-hero {
+    padding: 130px 0 60px;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(43,179,224,.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 80%, rgba(230,59,140,.12) 0%, transparent 60%),
+      var(--cream);
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+  .page-hero-desc {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .breadcrumbs a {
+    color: var(--magenta);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover { text-decoration: underline; }
+
+  /* SERVICES GRID — 5 carduri în 6 coloane (3+2 layout) */
+  #servicii { padding: 80px 0; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .services-grid .service-card { grid-column: span 2; }
+  .services-grid .service-card:nth-child(4) { grid-column: 2 / span 2; }
+  .services-grid .service-card:nth-child(5) { grid-column: 4 / span 2; }
+
+  .service-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    box-shadow: var(--shadow);
+    border-top: 4px solid var(--magenta);
+    transition: transform .25s, box-shadow .25s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: linear-gradient(135deg, rgba(230,59,140,.05), rgba(43,179,224,.05));
+    transition: opacity .25s;
+    pointer-events: none;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+  .service-card:hover::after { opacity: 1; }
+
+  .service-card:nth-child(2) { border-top-color: var(--blue); }
+  .service-card:nth-child(3) { border-top-color: var(--orange); }
+  .service-card:nth-child(4) { border-top-color: var(--teal); }
+  .service-card:nth-child(5) { border-top-color: var(--yellow); }
+
+  .service-icon {
+    font-size: 2.4rem;
+    width: 60px; height: 60px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    background: rgba(230,59,140,.12);
+  }
+  .service-card:nth-child(2) .service-icon { background: rgba(43,179,224,.12); }
+  .service-card:nth-child(3) .service-icon { background: rgba(255,138,42,.14); }
+  .service-card:nth-child(4) .service-icon { background: rgba(63,189,174,.14); }
+  .service-card:nth-child(5) .service-icon { background: rgba(255,217,61,.25); }
+
+  .service-card h2 {
+    font-weight: 800;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--navy);
+  }
+  .service-card > p {
+    font-size: .95rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .service-list {
+    list-style: none;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  .service-list li {
+    font-size: .9rem;
+    color: var(--text);
+    padding: 7px 0;
+    border-bottom: 1px dashed rgba(0,0,0,.08);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .service-list li::before {
+    content: '✦';
+    color: var(--magenta);
+    font-size: .7rem;
+  }
+  .service-card:nth-child(2) .service-list li::before { color: var(--blue); }
+  .service-card:nth-child(3) .service-list li::before { color: var(--orange); }
+  .service-card:nth-child(4) .service-list li::before { color: var(--teal); }
+  .service-card:nth-child(5) .service-list li::before { color: #c9a700; }
+
+  .service-list li.highlight {
+    background: linear-gradient(135deg, rgba(255,217,61,.18), rgba(255,138,42,.12));
+    border: 1.5px solid rgba(255,217,61,.5);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-top: 6px;
+    font-weight: 700;
+    color: var(--navy);
+    border-bottom: none;
+  }
+  .service-list li.highlight::before {
+    content: '★' !important;
+    color: var(--orange) !important;
+    font-size: .9rem !important;
+  }
+
+  .service-cta {
+    color: var(--magenta);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: .95rem;
+    margin-top: auto;
+  }
+  .service-cta:hover { text-decoration: underline; }
+
+  /* BOTTOM CTA */
+  .bottom-cta {
+    padding: 80px 0;
+    background: linear-gradient(135deg, rgba(230,59,140,.08), rgba(43,179,224,.08));
+  }
+  .cta-box {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 48px 32px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .cta-box h2 {
+    font-weight: 800;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    margin-bottom: 12px;
+    color: var(--navy);
+  }
+  .cta-box p {
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid .service-card,
+    .services-grid .service-card:nth-child(4),
+    .services-grid .service-card:nth-child(5) { grid-column: auto; }
+  }
+  @media (max-width: 700px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .page-hero { padding: 110px 0 40px; }
+    #servicii { padding: 60px 0; }
+  }
+</style>

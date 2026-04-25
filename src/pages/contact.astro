@@ -1,0 +1,593 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Acasă', url: '/' },
+  { name: 'Contact', url: '/contact/' },
+];
+---
+
+<BaseLayout
+  title="Contact Magic Kids Afterschool — Strada Parângului 118, Novaci"
+  description="Contactează Magic Kids Afterschool: telefon 0760 245 111, email contact@magickidsnovaci.ro, adresa Strada Parângului 118, Novaci, Gorj. Vizită gratuită fără obligație. Te sunăm noi în maxim 24h."
+  pageName="Contact"
+  pageType="ContactPage"
+  breadcrumbs={breadcrumbs}>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Cale de navigare">
+        <a href="/">Acasă</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Contact</span>
+      </nav>
+      <span class="section-label">Vino să ne cunoști</span>
+      <h1>Te așteptăm la Magic Kids</h1>
+      <p class="page-hero-desc">Cea mai bună decizie o iei când ne vizitezi. Vino să vezi spațiul, să cunoști echipa și să simți atmosfera.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT INFO -->
+  <section id="contact-info">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-text">
+          <h2 class="section-title">Date de contact</h2>
+          <div class="contact-cards">
+            <a href="tel:+40760245111" class="contact-card contact-card-phone">
+              <div class="contact-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <div class="contact-label">Sună-ne direct</div>
+                <div class="contact-value">0760 245 111</div>
+              </div>
+            </a>
+            <a href="mailto:contact@magickidsnovaci.ro" class="contact-card contact-card-email">
+              <div class="contact-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </div>
+              <div>
+                <div class="contact-label">Scrie-ne</div>
+                <div class="contact-value">contact@magickidsnovaci.ro</div>
+              </div>
+            </a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Strada+Par%C3%A2ngului+118+Novaci+Gorj" target="_blank" rel="noopener" class="contact-card contact-card-address">
+              <div class="contact-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="contact-label">Adresa noastră</div>
+                <div class="contact-value">Str. Parângului nr. 118<br />Novaci, jud. Gorj</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="social-cta">
+            <p class="social-cta-text">Urmărește-ne pe rețelele sociale pentru poze, activități și momente magice:</p>
+            <div class="social-cta-buttons">
+              <a href="https://www.facebook.com/magickidsafterschool/" target="_blank" rel="noopener" class="social-btn social-btn-fb">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+              </a>
+              <a href="https://www.instagram.com/magickidsafterschool" target="_blank" rel="noopener" class="social-btn social-btn-ig">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-visual">
+          <div class="map-placeholder">
+            <div class="map-content">
+              <div class="map-pin">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3" fill="white" stroke="white"/></svg>
+              </div>
+              <h3>Magic Kids Afterschool</h3>
+              <p>Str. Parângului nr. 118<br />Novaci, jud. Gorj</p>
+              <a href="https://www.google.com/maps/search/?api=1&query=Strada+Par%C3%A2ngului+118+Novaci+Gorj" target="_blank" rel="noopener" class="btn btn-primary">
+                Vezi pe Google Maps →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULAR ÎNSCRIERE -->
+  <section id="inscriere">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-text">
+          <span class="section-label">Înscrie-te</span>
+          <h2 class="section-title">Primul pas e cel mai ușor</h2>
+          <p>Completează formularul alăturat și te contactăm în maxim 24 de ore pentru a stabili o vizită gratuită la afterschool.</p>
+          <ul class="cta-features">
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Vizită gratuită fără nicio obligație</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Locuri limitate — rezervă acum</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Te sunăm noi în maxim 24h</li>
+            <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Poți renunța oricând în prima lună</li>
+          </ul>
+        </div>
+
+        <form class="cta-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <!-- Web3Forms config -->
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE" />
+          <input type="hidden" name="subject" value="Cerere înscriere — magickidsnovaci.ro" />
+          <input type="hidden" name="from_name" value="Site Magic Kids Afterschool" />
+          <input type="hidden" name="redirect" value="false" />
+          <!-- Honeypot anti-spam: roboții îl completează, oamenii nu -->
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Numele tău *</label>
+              <input id="name" name="name" type="text" placeholder="ex. Maria Ionescu" required autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Telefon *</label>
+              <input id="phone" name="phone" type="tel" placeholder="07xx xxx xxx" required autocomplete="tel" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="adresa@email.ro" autocomplete="email" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="class">Clasa copilului *</label>
+              <select id="class" name="class" required>
+                <option value="">Selectează...</option>
+                <option>Clasa pregătitoare (0)</option>
+                <option>Clasa I</option>
+                <option>Clasa a II-a</option>
+                <option>Clasa a III-a</option>
+                <option>Clasa a IV-a</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="program">Ce vă interesează *</label>
+              <select id="program" name="program" required>
+                <option value="">Selectează...</option>
+                <option>Afterschool complet</option>
+                <option>Doar activități opționale</option>
+                <option>Doar Limba Engleză</option>
+                <option>Meditații (română/matematică)</option>
+                <option>Nu m-am decis încă</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Mesaj (opțional)</label>
+            <textarea id="message" name="message" rows="3" placeholder="Orice întrebare sau detaliu relevant..."></textarea>
+          </div>
+
+          <div class="form-status" id="formStatus" role="status" aria-live="polite" hidden></div>
+
+          <button type="submit" class="btn btn-primary form-submit" id="formSubmit">
+            <span class="form-submit-label">Trimite cererea de înscriere ✦</span>
+            <span class="form-submit-spinner" aria-hidden="true"></span>
+          </button>
+          <p class="form-note">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:4px;" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Datele tale sunt în siguranță și nu vor fi împărtășite cu terți.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 130px 0 60px;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(43,179,224,.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 80%, rgba(230,59,140,.12) 0%, transparent 60%),
+      var(--cream);
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    margin-bottom: 16px;
+  }
+  .page-hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .breadcrumbs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .breadcrumbs a { color: var(--magenta); text-decoration: none; }
+  .breadcrumbs a:hover { text-decoration: underline; }
+
+  /* CONTACT */
+  #contact-info {
+    padding: 80px 0;
+    background:
+      linear-gradient(135deg, rgba(63,189,174,.05), rgba(43,179,224,.05)),
+      var(--cream);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .contact-text h2 { margin-bottom: 28px; }
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
+    border-left: 4px solid var(--blue);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .contact-card:hover {
+    transform: translateX(6px);
+    box-shadow: var(--shadow-lg);
+  }
+  .contact-card-phone { border-left-color: var(--magenta); }
+  .contact-card-email { border-left-color: var(--blue); }
+  .contact-card-address { border-left-color: var(--orange); }
+
+  .contact-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(43,179,224,.1);
+  }
+  .contact-card-phone .contact-icon { background: rgba(230,59,140,.12); color: var(--magenta); }
+  .contact-card-email .contact-icon { background: rgba(43,179,224,.12); color: var(--blue); }
+  .contact-card-address .contact-icon { background: rgba(255,138,42,.14); color: var(--orange); }
+
+  .contact-label {
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 2px;
+  }
+  .contact-value {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+
+  .social-cta {
+    background: rgba(43,179,224,.06);
+    border-radius: 16px;
+    padding: 22px;
+    border: 1.5px dashed rgba(43,179,224,.3);
+  }
+  .social-cta-text {
+    font-size: .92rem;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .social-cta-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .9rem;
+    text-decoration: none;
+    color: var(--white);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .social-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .social-btn-fb { background: #1877F2; }
+  .social-btn-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+
+  /* MAP */
+  .contact-visual { display: flex; align-items: center; justify-content: center; }
+  .map-placeholder {
+    background: linear-gradient(135deg, var(--magenta), var(--blue), var(--teal));
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    padding: 4px;
+    width: 100%;
+    max-width: 460px;
+  }
+  .map-content {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 50px 32px;
+    text-align: center;
+  }
+  .map-pin {
+    width: 64px; height: 64px;
+    margin: 0 auto 16px;
+    color: var(--magenta);
+    animation: bounce-pin 2s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(230,59,140,.3));
+  }
+  .map-pin svg { width: 100%; height: 100%; }
+  @keyframes bounce-pin {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-10px); }
+  }
+  .map-content h3 {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .map-content p {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* INSCRIERE */
+  #inscriere {
+    padding: 80px 0;
+    background: linear-gradient(135deg, rgba(230,59,140,.08), rgba(43,179,224,.08));
+  }
+  .cta-box {
+    background: var(--white);
+    border-radius: 32px;
+    box-shadow: var(--shadow-lg);
+    padding: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .cta-text h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 16px; }
+  .cta-text p { color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+  .cta-features { list-style: none; }
+  .cta-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .95rem;
+    color: var(--text);
+    padding: 8px 0;
+  }
+  .check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(43,179,224,.18);
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .check svg { width: 12px; height: 12px; }
+
+  /* FORM */
+  .cta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 2px solid rgba(0,0,0,.10);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--cream);
+    outline: none;
+    transition: border .2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--blue);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-submit {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.05rem;
+    padding: 16px;
+    position: relative;
+  }
+  .form-submit:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+  .form-submit-spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+    border: 2.5px solid rgba(255,255,255,.4);
+    border-top-color: var(--white);
+    border-radius: 50%;
+    animation: form-spin .7s linear infinite;
+  }
+  .form-submit.is-loading .form-submit-spinner { display: inline-block; }
+  @keyframes form-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .form-submit-spinner { animation-duration: 1.5s; }
+  }
+  .form-note {
+    font-size: .78rem;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* Honeypot — vizibil pentru roboți, ascuns pentru oameni & screen readers */
+  .hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px !important;
+    height: 1px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Status feedback (succes/eroare) */
+  .form-status {
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: .95rem;
+    line-height: 1.5;
+    border: 2px solid transparent;
+  }
+  .form-status.is-success {
+    background: rgba(63,189,174,.12);
+    border-color: rgba(63,189,174,.4);
+    color: #1a6b62;
+  }
+  .form-status.is-error {
+    background: rgba(230,59,140,.10);
+    border-color: rgba(230,59,140,.4);
+    color: #a31963;
+  }
+  .form-status strong { font-family: 'Baloo 2', sans-serif; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .cta-box {
+      grid-template-columns: 1fr;
+      padding: 36px 24px;
+      gap: 32px;
+    }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Web3Forms integration — endpoint primește multipart/form-data sau JSON
+  // și trimite emailul către adresa folosită la generarea access_key-ului.
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const statusEl = document.getElementById('formStatus') as HTMLDivElement | null;
+  const submitBtn = document.getElementById('formSubmit') as HTMLButtonElement | null;
+  const submitLabel = submitBtn?.querySelector('.form-submit-label') as HTMLSpanElement | null;
+
+  function setStatus(kind: 'success' | 'error' | 'hidden', message: string) {
+    if (!statusEl) return;
+    if (kind === 'hidden') {
+      statusEl.hidden = true;
+      statusEl.classList.remove('is-success', 'is-error');
+      statusEl.innerHTML = '';
+      return;
+    }
+    statusEl.hidden = false;
+    statusEl.classList.toggle('is-success', kind === 'success');
+    statusEl.classList.toggle('is-error', kind === 'error');
+    statusEl.innerHTML = message;
+  }
+
+  if (form && submitBtn) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setStatus('hidden', '');
+
+      // Verifică dacă access_key e încă placeholderul — protejează deploy accidental
+      const accessKey = (form.elements.namedItem('access_key') as HTMLInputElement | null)?.value || '';
+      if (accessKey.startsWith('YOUR_WEB3FORMS_ACCESS_KEY')) {
+        setStatus(
+          'error',
+          '<strong>Formularul nu este încă activat.</strong> Configurează access_key-ul Web3Forms în <code>contact.astro</code>.'
+        );
+        return;
+      }
+
+      // Validare nativă HTML
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Loading state
+      submitBtn.disabled = true;
+      submitBtn.classList.add('is-loading');
+      if (submitLabel) submitLabel.textContent = 'Se trimite...';
+
+      try {
+        const formData = new FormData(form);
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: formData,
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.success) {
+          setStatus(
+            'success',
+            '<strong>Mulțumim!</strong> Cererea a fost trimisă cu succes. Te contactăm în maxim 24 de ore. ✦'
+          );
+          form.reset();
+          statusEl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          const reason = (data && data.message) ? ` (${data.message})` : '';
+          setStatus(
+            'error',
+            `<strong>Ups, ceva nu a funcționat.</strong> Te rugăm să ne suni direct la <a href="tel:+40760245111">0760 245 111</a> sau să ne scrii la <a href="mailto:contact@magickidsnovaci.ro">contact@magickidsnovaci.ro</a>.${reason}`
+          );
+        }
+      } catch (err) {
+        setStatus(
+          'error',
+          '<strong>Conexiune întreruptă.</strong> Verifică internetul și încearcă din nou, sau sună-ne la <a href="tel:+40760245111">0760 245 111</a>.'
+        );
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('is-loading');
+        if (submitLabel) submitLabel.textContent = 'Trimite cererea de înscriere ✦';
+      }
+    });
+  }
+</script>

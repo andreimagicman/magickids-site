@@ -1,0 +1,220 @@
+---
+/**
+ * Schema.org JSON-LD — Conform best practices 2026 pentru AI visibility
+ * Include: Organization, EducationalOrganization, LocalBusiness, BreadcrumbList
+ * AI engines (ChatGPT, Claude, Perplexity, Gemini) folosesc asta pentru a cita corect.
+ */
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface Props {
+  type?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'Service';
+  pageName: string;
+  pageDescription: string;
+  breadcrumbs?: BreadcrumbItem[];
+  serviceName?: string;
+  serviceDescription?: string;
+}
+
+const {
+  type = 'WebPage',
+  pageName,
+  pageDescription,
+  breadcrumbs = [],
+  serviceName,
+  serviceDescription,
+} = Astro.props;
+
+const SITE_URL = 'https://magickidsnovaci.ro';
+
+// Graph cu toate entitățile interconectate (best practice 2026)
+const schemaGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    // 1. ORGANIZAȚIA — entitatea principală
+    {
+      '@type': ['Organization', 'EducationalOrganization', 'LocalBusiness'],
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Magic Kids Afterschool',
+      alternateName: 'Magic Kids Novaci',
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${SITE_URL}/#logo`,
+        url: `${SITE_URL}/logo.png`,
+        contentUrl: `${SITE_URL}/logo.png`,
+        width: 1024,
+        height: 1024,
+        caption: 'Magic Kids Afterschool',
+      },
+      image: { '@id': `${SITE_URL}/#logo` },
+      description:
+        'Afterschool privat pentru clasele 0–IV în Novaci, județul Gorj. Sprijin la teme, masă caldă, activități tematice (engleză, dezvoltare personală, art & craft) și meditații la română și matematică. Calitate, nu cantitate.',
+      slogan: 'Calitate, nu cantitate',
+      foundingDate: '2024',
+      knowsAbout: [
+        'Afterschool clase primare',
+        'Sprijin teme școlare',
+        'Cursuri engleză copii',
+        'Dezvoltare personală copii',
+        'Art and Craft pentru copii',
+        'Meditații română matematică',
+        'Pregătire Evaluare Națională',
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Strada Parângului nr. 118',
+        addressLocality: 'Novaci',
+        addressRegion: 'Gorj',
+        postalCode: '215300',
+        addressCountry: 'RO',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 45.1815,
+        longitude: 23.6680,
+      },
+      telephone: '+40760245111',
+      email: 'contact@magickidsnovaci.ro',
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+          opens: '12:00',
+          closes: '17:00',
+        },
+      ],
+      priceRange: '1350 RON / an școlar',
+      sameAs: [
+        'https://www.facebook.com/magickidsafterschool/',
+        'https://www.instagram.com/magickidsafterschool',
+      ],
+      areaServed: {
+        '@type': 'City',
+        name: 'Novaci',
+        '@id': 'https://www.wikidata.org/wiki/Q1027117',
+      },
+      audience: {
+        '@type': 'EducationalAudience',
+        educationalRole: 'student',
+        audienceType: 'Copii clasele 0-IV',
+      },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Programe Magic Kids',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Afterschool Complet',
+              description:
+                'Program complet 12:00-17:00: preluare, masă caldă, sprijin teme, gustare, activitate tematică zilnică',
+            },
+            price: '1350',
+            priceCurrency: 'RON',
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: '1350',
+              priceCurrency: 'RON',
+              referenceQuantity: {
+                '@type': 'QuantitativeValue',
+                value: 1,
+                unitText: 'an școlar',
+              },
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Activități Tematice',
+              description:
+                'Engleză (Luni & Joi), Dezvoltare Personală (Marți), Art & Craft (Miercuri), Călător prin Lume (Vineri)',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Meditații',
+              description:
+                'Meditații la română și matematică pentru clasele 0-IV. Pregătire Evaluare Națională și concursuri.',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Doar Limba Engleză',
+              description: 'Curs separat de engleză pentru toate vârstele, Luni și Joi',
+            },
+          },
+        ],
+      },
+    },
+
+    // 2. WEBSITE
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: 'Magic Kids Afterschool',
+      description:
+        'Afterschool privat în Novaci, Gorj — calitate, nu cantitate, pentru clasele 0-IV',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: 'ro-RO',
+    },
+
+    // 3. WEBPAGE — pagina curentă
+    {
+      '@type': type,
+      '@id': `${Astro.url}#webpage`,
+      url: Astro.url.toString(),
+      name: pageName,
+      description: pageDescription,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: { '@id': `${SITE_URL}/#organization` },
+      inLanguage: 'ro-RO',
+    },
+
+    // 4. BREADCRUMBS (dacă există)
+    ...(breadcrumbs.length > 0
+      ? [
+          {
+            '@type': 'BreadcrumbList',
+            '@id': `${Astro.url}#breadcrumb`,
+            itemListElement: breadcrumbs.map((item, index) => ({
+              '@type': 'ListItem',
+              position: index + 1,
+              name: item.name,
+              item: new URL(item.url, SITE_URL).toString(),
+            })),
+          },
+        ]
+      : []),
+
+    // 5. SERVICE (dacă tipul e Service)
+    ...(type === 'Service' && serviceName
+      ? [
+          {
+            '@type': 'Service',
+            '@id': `${Astro.url}#service`,
+            name: serviceName,
+            description: serviceDescription,
+            provider: { '@id': `${SITE_URL}/#organization` },
+            areaServed: {
+              '@type': 'City',
+              name: 'Novaci',
+            },
+            serviceType: 'Afterschool / Educație',
+          },
+        ]
+      : []),
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />

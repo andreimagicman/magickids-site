@@ -1,0 +1,330 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const breadcrumbs = [
+  { name: 'Acasă', url: '/' },
+  { name: 'Program', url: '/program/' },
+];
+---
+
+<BaseLayout
+  title="Programul zilnic și săptămânal — Magic Kids Afterschool Novaci"
+  description="Programul zilnic Magic Kids: 12:00-17:00, masă caldă la 13:00, sprijin teme, gustare la 15:45, activitate tematică zilnică. Programul săptămânal: Luni & Joi engleză, Marți dezvoltare personală, Miercuri art & craft, Vineri călător prin lume."
+  pageName="Program"
+  breadcrumbs={breadcrumbs}>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Cale de navigare">
+        <a href="/">Acasă</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Program</span>
+      </nav>
+      <span class="section-label">Programul nostru</span>
+      <h1>Fiecare oră are un scop</h1>
+      <p class="page-hero-desc">Ziua la Magic Kids este structurată cu grijă: copilul este preluat, mănâncă o masă caldă, își face temele liniștit, gustă sănătos și termină ziua cu o activitate plină de bucurie.</p>
+    </div>
+  </section>
+
+  <!-- DAILY SCHEDULE -->
+  <section id="program-zilnic">
+    <div class="container">
+      <div class="program-grid">
+        <div class="schedule-visual">
+          <div class="schedule-header">
+            <span class="icon icon-md icon-white" style="margin-right:8px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </span>
+            Programul zilnic — 12:00 până la 17:00
+          </div>
+          <div class="schedule-body">
+            <div class="schedule-row">
+              <span class="sched-time">12:00</span>
+              <span class="sched-activity">Preluare copii de la școală</span>
+              <span class="sched-badge badge-blue">🚶 Sosire</span>
+            </div>
+            <div class="schedule-row">
+              <span class="sched-time">13:00</span>
+              <span class="sched-activity">Masa caldă</span>
+              <span class="sched-badge badge-yellow">🍲 Prânz</span>
+            </div>
+            <div class="schedule-row">
+              <span class="sched-time">13:00–15:30</span>
+              <span class="sched-activity">Sprijin la teme</span>
+              <span class="sched-badge badge-red">📚 Teme</span>
+            </div>
+            <div class="schedule-row">
+              <span class="sched-time">15:45</span>
+              <span class="sched-activity">Gustare sănătoasă</span>
+              <span class="sched-badge badge-yellow">🍎 Snack</span>
+            </div>
+            <div class="schedule-row">
+              <span class="sched-time">16:00</span>
+              <span class="sched-activity">Activitate tematică zilnică</span>
+              <span class="sched-badge badge-orange">🎨 Activitate</span>
+            </div>
+            <div class="schedule-row">
+              <span class="sched-time">17:00</span>
+              <span class="sched-activity">Preluare de către părinți</span>
+              <span class="sched-badge badge-blue">👪 Family</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="program-info">
+          <span class="section-label">Detalii practice</span>
+          <h2 class="section-title">Ritmul zilei</h2>
+          <p>Ziua începe relaxat cu masa caldă, apoi trecem la teme cu energie, urmează o gustare și ne încheiem cu o activitate creativă diferită în fiecare zi.</p>
+          <div class="info-pills">
+            <div class="info-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+              Luni – Vineri
+            </div>
+            <div class="info-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              12:00 – 17:00
+            </div>
+            <div class="info-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/></svg>
+              Cls. 0–4
+            </div>
+            <div class="info-pill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg>
+              Grupe mici
+            </div>
+          </div>
+          <a href="/contact/#inscriere" class="btn btn-primary">Rezervă un loc →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEKLY SCHEDULE -->
+  <section id="program-saptamanal">
+    <div class="container">
+      <div class="weekly-header">
+        <span class="section-label">Activitatea zilei</span>
+        <h2 class="section-title">O săptămână plină de descoperiri</h2>
+        <p class="section-sub">În fiecare zi de la ora 16:00, copiii se cufundă într-o activitate diferită — pentru a învăța, a crea și a se distra.</p>
+      </div>
+      <div class="weekly-grid">
+        <article class="day-card day-mon">
+          <div class="day-name">Luni</div>
+          <div class="day-icon" aria-hidden="true">🌍</div>
+          <div class="day-activity">Engleză</div>
+          <p>Cursuri de engleză prin joc și conversație, în atmosferă relaxată.</p>
+        </article>
+        <article class="day-card day-tue">
+          <div class="day-name">Marți</div>
+          <div class="day-icon" aria-hidden="true">💫</div>
+          <div class="day-activity">Dezvoltare Personală</div>
+          <p>Emoții, încredere, comunicare — abilități pentru viață.</p>
+        </article>
+        <article class="day-card day-wed">
+          <div class="day-name">Miercuri</div>
+          <div class="day-icon" aria-hidden="true">🎨</div>
+          <div class="day-activity">Art &amp; Craft</div>
+          <p>Creativitate cu mâinile lor — pictură, colaje, mici proiecte.</p>
+        </article>
+        <article class="day-card day-thu">
+          <div class="day-name">Joi</div>
+          <div class="day-icon" aria-hidden="true">🌍</div>
+          <div class="day-activity">Engleză</div>
+          <p>A doua oră săptămânală de engleză — pentru consolidare reală.</p>
+        </article>
+        <article class="day-card day-fri">
+          <div class="day-name">Vineri</div>
+          <div class="day-icon" aria-hidden="true">✈️</div>
+          <div class="day-activity">Călător prin Lume</div>
+          <p>Explorăm țări, culturi și tradiții din întreaga lume.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* PAGE HERO */
+  .page-hero {
+    padding: 130px 0 60px;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(43,179,224,.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 80%, rgba(230,59,140,.12) 0%, transparent 60%),
+      var(--cream);
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    margin-bottom: 16px;
+  }
+  .page-hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .breadcrumbs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .breadcrumbs a { color: var(--magenta); text-decoration: none; }
+  .breadcrumbs a:hover { text-decoration: underline; }
+
+  /* DAILY SCHEDULE */
+  #program-zilnic { padding: 80px 0; }
+  .program-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .schedule-visual {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .schedule-header {
+    background: var(--magenta);
+    color: var(--white);
+    padding: 20px 28px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+  }
+  .schedule-body { padding: 8px 0; }
+  .schedule-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    transition: background .15s;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .schedule-row:hover { background: rgba(43,179,224,.06); }
+  .schedule-row:last-child { border-bottom: none; }
+  .sched-time {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    min-width: 90px;
+  }
+  .sched-activity {
+    font-size: .9rem;
+    color: var(--text);
+    flex-grow: 1;
+  }
+  .sched-badge {
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    white-space: nowrap;
+  }
+  .badge-blue   { background: rgba(43,179,224,.15); color: #1a8cb4; }
+  .badge-red    { background: rgba(230,59,140,.15); color: var(--magenta); }
+  .badge-orange { background: rgba(255,138,42,.18); color: #cc6a00; }
+  .badge-yellow { background: rgba(255,217,61,.30); color: #a8860b; }
+
+  .program-info p {
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+  .info-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .info-pill {
+    background: var(--white);
+    border: 1.5px solid rgba(43,179,224,.25);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-pill svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* WEEKLY */
+  #program-saptamanal { padding: 80px 0; background: var(--cream); }
+  .weekly-header { text-align: center; margin-bottom: 50px; }
+  .weekly-header .section-sub { margin: 0 auto; }
+  .weekly-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+  }
+  .day-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-top: 5px solid var(--blue);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .day-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+  .day-mon { border-top-color: var(--blue); }
+  .day-tue { border-top-color: var(--magenta); }
+  .day-wed { border-top-color: var(--orange); }
+  .day-thu { border-top-color: var(--blue); }
+  .day-fri { border-top-color: var(--teal); }
+  .day-name {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .day-icon { font-size: 2.4rem; margin-bottom: 10px; }
+  .day-activity {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .day-card p {
+    font-size: .82rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .program-grid { grid-template-columns: 1fr; gap: 40px; }
+    .weekly-grid { grid-template-columns: repeat(2, 1fr); }
+    .schedule-row { padding: 12px 20px; }
+    .sched-time { min-width: 70px; font-size: .9rem; }
+  }
+  @media (max-width: 520px) {
+    .weekly-grid { grid-template-columns: 1fr; }
+    .schedule-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+  }
+</style>

@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const breadcrumbs = [
+  { name: 'Acasă', url: '/' },
+  { name: 'Blog', url: '/blog/' },
+];
+---
+
+<BaseLayout
+  title="Blog Magic Kids — Sfaturi pentru părinți și articole educaționale"
+  description="Articole utile pentru părinții copiilor de școală primară: sfaturi despre afterschool, dezvoltarea copilului, învățarea limbii engleze, gestionarea temelor și activități creative."
+  pageName="Blog"
+  breadcrumbs={breadcrumbs}>
+
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Cale de navigare">
+        <a href="/">Acasă</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">Blog</span>
+      </nav>
+      <span class="section-label">Blog</span>
+      <h1>Sfaturi pentru părinți</h1>
+      <p class="page-hero-desc">Articole utile despre dezvoltarea copilului, afterschool, învățare și activități creative — totul scris cu inima.</p>
+    </div>
+  </section>
+
+  <section id="blog-list">
+    <div class="container">
+      {posts.length === 0 ? (
+        <div class="empty-state">
+          <p>În curând vom publica primele articole. Urmărește-ne pe <a href="https://www.facebook.com/magickidsafterschool/">Facebook</a> sau <a href="https://www.instagram.com/magickidsafterschool">Instagram</a> pentru actualizări!</p>
+        </div>
+      ) : (
+        <div class="posts-grid">
+          {posts.map((post) => (
+            <article class="post-card">
+              {post.data.image && (
+                <a href={`/blog/${post.id}/`} class="post-card-image">
+                  <img src={post.data.image} alt={post.data.imageAlt || post.data.title} loading="lazy" />
+                </a>
+              )}
+              <div class="post-card-content">
+                {post.data.tags.length > 0 && (
+                  <div class="post-card-tags">
+                    {post.data.tags.slice(0, 2).map(tag => <span class="post-card-tag">#{tag}</span>)}
+                  </div>
+                )}
+                <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+                <p>{post.data.description}</p>
+                <div class="post-card-meta">
+                  <time datetime={post.data.publishDate.toISOString()}>
+                    {post.data.publishDate.toLocaleDateString('ro-RO', { year: 'numeric', month: 'long', day: 'numeric' })}
+                  </time>
+                  <a href={`/blog/${post.id}/`} class="read-more">Citește →</a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding: 130px 0 60px;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(43,179,224,.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 10% 80%, rgba(230,59,140,.12) 0%, transparent 60%),
+      var(--cream);
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    margin-bottom: 16px;
+  }
+  .page-hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .breadcrumbs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    font-size: .85rem;
+    color: var(--muted);
+  }
+  .breadcrumbs a { color: var(--magenta); text-decoration: none; }
+  .breadcrumbs a:hover { text-decoration: underline; }
+
+  #blog-list { padding: 60px 0 100px; }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .empty-state a {
+    color: var(--magenta);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .post-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform .25s, box-shadow .25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .post-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+  .post-card-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    display: block;
+  }
+  .post-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s;
+  }
+  .post-card:hover .post-card-image img {
+    transform: scale(1.05);
+  }
+  .post-card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .post-card-tags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .post-card-tag {
+    background: rgba(43,179,224,.12);
+    color: var(--blue);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: .75rem;
+    font-weight: 600;
+  }
+  .post-card h2 {
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .post-card h2 a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .post-card h2 a:hover { color: var(--magenta); }
+  .post-card-content > p {
+    color: var(--muted);
+    font-size: .92rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    flex-grow: 1;
+  }
+  .post-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .82rem;
+    color: var(--muted);
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,.06);
+  }
+  .read-more {
+    color: var(--magenta);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .read-more:hover { text-decoration: underline; }
+
+  @media (max-width: 1000px) {
+    .posts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .posts-grid { grid-template-columns: 1fr; }
+  }
+</style>
