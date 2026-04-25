@@ -173,19 +173,94 @@
     .hero-logo-wrap img { width: 100%; height: auto; display: block; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
 
+    /* ── SPARKLES — animație de "vrajă" ───────── */
     .sparkle {
       position: absolute; z-index: 1;
-      font-size: 1.5rem; opacity: .7;
-      animation: twinkle 3s ease-in-out infinite;
+      pointer-events: none;
+      will-change: transform, opacity;
+      opacity: 0;
+      /* Animația va fi setată via JavaScript pentru calcul precis */
     }
-    .sp-1 { top: 8%;  left: 6%;  color: var(--yellow); animation-delay: 0s; }
-    .sp-2 { top: 20%; right: 4%; color: var(--blue); animation-delay: .8s; font-size: 1.2rem; }
-    .sp-3 { bottom: 18%; left: 2%; color: var(--magenta); animation-delay: 1.4s; font-size: 1.3rem; }
-    .sp-4 { bottom: 8%; right: 8%; color: var(--orange); animation-delay: 2s; font-size: 1.4rem; }
-    .sp-5 { top: 50%; left: -2%; color: var(--teal); animation-delay: 2.4s; font-size: 1.1rem; }
+
+    .sparkle.cast {
+      animation: cast-spell var(--cast-duration, 2.4s) cubic-bezier(.25, .85, .35, 1) forwards;
+    }
+
+    .sparkle.twinkling {
+      animation: twinkle 3s ease-in-out infinite;
+      opacity: .9;
+    }
+
+    /* Cele 5 sparkles ORIGINALE (mari, importante) */
+    .sp-1 { top: 8%;  left: 6%;  color: var(--yellow);  font-size: 1.5rem; }
+    .sp-2 { top: 20%; right: 4%; color: var(--blue);    font-size: 1.2rem; }
+    .sp-3 { bottom: 18%; left: 2%; color: var(--magenta); font-size: 1.3rem; }
+    .sp-4 { bottom: 8%; right: 8%; color: var(--orange); font-size: 1.4rem; }
+    .sp-5 { top: 50%; left: -2%; color: var(--teal);    font-size: 1.1rem; }
+
+    /* 10 sparkles SUPLIMENTARE — mai mici, mai magice */
+    .sp-6  { top: 12%; left: 30%; color: var(--magenta); font-size: .8rem;  }
+    .sp-7  { top: 18%; right: 28%; color: var(--yellow); font-size: .9rem; }
+    .sp-8  { top: 35%; left: 12%; color: var(--orange); font-size: .7rem;  }
+    .sp-9  { top: 40%; right: 10%; color: var(--teal);  font-size: .85rem; }
+    .sp-10 { top: 60%; left: 18%; color: var(--blue);   font-size: .75rem; }
+    .sp-11 { top: 65%; right: 18%; color: var(--magenta); font-size: .9rem; }
+    .sp-12 { top: 28%; left: 45%; color: var(--yellow); font-size: .8rem;  }
+    .sp-13 { top: 78%; left: 48%; color: var(--orange); font-size: .7rem;  }
+    .sp-14 { top: 5%;  right: 38%; color: var(--teal);  font-size: .85rem; }
+    .sp-15 { bottom: 30%; right: 32%; color: var(--blue); font-size: .75rem; }
+
+    /* Animație de "vrajă": pleacă de la baghetă (offset prin --dx, --dy setate de JS) → ajunge la 0,0 */
+    @keyframes cast-spell {
+      0% {
+        opacity: 0;
+        transform: translate(var(--dx, 0), var(--dy, 0)) scale(.1) rotate(-180deg);
+        filter: blur(2px);
+      }
+      20% {
+        opacity: 1;
+        transform: translate(calc(var(--dx, 0) * .7), calc(var(--dy, 0) * .7)) scale(.6) rotate(-90deg);
+        filter: blur(0);
+      }
+      75% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1.5) rotate(30deg);
+      }
+      100% {
+        opacity: .9;
+        transform: translate(0, 0) scale(1) rotate(0);
+      }
+    }
+
+    /* Twinkle continuu după "vrajă" */
     @keyframes twinkle {
-      0%,100% { opacity: .3; transform: scale(.9); }
-      50%     { opacity: 1;  transform: scale(1.2); }
+      0%,100% { opacity: .35; transform: scale(.9); }
+      50%     { opacity: 1;   transform: scale(1.2); }
+    }
+
+    /* Glow magic la baghete în timpul vrajii */
+    .wand-glow {
+      position: absolute;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+    }
+    .wand-glow-left {
+      background: radial-gradient(circle, rgba(255,217,61,.65), rgba(230,59,140,.25) 50%, transparent 70%);
+    }
+    .wand-glow-right {
+      background: radial-gradient(circle, rgba(43,179,224,.65), rgba(255,138,42,.25) 50%, transparent 70%);
+    }
+    .wand-glow.active {
+      animation: wand-glow-anim 1.4s ease-out forwards;
+    }
+    @keyframes wand-glow-anim {
+      0%   { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+      30%  { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
     }
 
     .floating-chip {
@@ -826,11 +901,24 @@
       </div>
 
       <div class="hero-visual">
+        <span class="wand-glow wand-glow-left" id="wandGlowLeft"></span>
+        <span class="wand-glow wand-glow-right" id="wandGlowRight"></span>
+
         <span class="sparkle sp-1">✦</span>
         <span class="sparkle sp-2">✧</span>
         <span class="sparkle sp-3">✦</span>
         <span class="sparkle sp-4">✧</span>
         <span class="sparkle sp-5">✦</span>
+        <span class="sparkle sp-6">✦</span>
+        <span class="sparkle sp-7">✧</span>
+        <span class="sparkle sp-8">★</span>
+        <span class="sparkle sp-9">✦</span>
+        <span class="sparkle sp-10">✧</span>
+        <span class="sparkle sp-11">✦</span>
+        <span class="sparkle sp-12">★</span>
+        <span class="sparkle sp-13">✧</span>
+        <span class="sparkle sp-14">✦</span>
+        <span class="sparkle sp-15">★</span>
 
         <div class="floating-chip chip-1">🎨 Creativitate</div>
         <div class="floating-chip chip-2">📚 Teme făcute!</div>
@@ -1284,6 +1372,110 @@
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity .6s ease, transform .6s ease';
     observer.observe(el);
+  });
+
+  // ═══════════════════════════════════════════════
+  // 🪄 ANIMAȚIE DE VRAJĂ — sparkles din baghete
+  // ═══════════════════════════════════════════════
+  function castMagicSpell() {
+    const heroVisual = document.querySelector('.hero-visual');
+    const logoWrap = document.querySelector('.hero-logo-wrap');
+    const sparkles = document.querySelectorAll('.sparkle');
+    const glowLeft = document.getElementById('wandGlowLeft');
+    const glowRight = document.getElementById('wandGlowRight');
+
+    if (!heroVisual || !logoWrap || sparkles.length === 0) return;
+
+    // Aflăm dimensiunile reale ale logo-ului pentru a calcula pozițiile baghetelor
+    const visualRect = heroVisual.getBoundingClientRect();
+    const logoRect = logoWrap.getBoundingClientRect();
+
+    // Pozițiile baghetelor în interiorul logo-ului
+    // Bagheta stângă: ~22% din lățimea logo-ului, ~70% din înălțime (relativ la logo)
+    // Bagheta dreaptă: ~78% din lățimea logo-ului, ~70% din înălțime
+    const logoOffsetX = logoRect.left - visualRect.left;
+    const logoOffsetY = logoRect.top - visualRect.top;
+
+    const wandLeft = {
+      x: logoOffsetX + logoRect.width * 0.22,
+      y: logoOffsetY + logoRect.height * 0.70
+    };
+    const wandRight = {
+      x: logoOffsetX + logoRect.width * 0.78,
+      y: logoOffsetY + logoRect.height * 0.70
+    };
+
+    // Setăm pozițiile glow-urilor pe baghete
+    glowLeft.style.left = wandLeft.x + 'px';
+    glowLeft.style.top = wandLeft.y + 'px';
+    glowRight.style.left = wandRight.x + 'px';
+    glowRight.style.top = wandRight.y + 'px';
+
+    // Curățăm clasele active de la o eventuală animație anterioară
+    sparkles.forEach(s => { s.classList.remove('cast', 'twinkling'); });
+    glowLeft.classList.remove('active');
+    glowRight.classList.remove('active');
+
+    // Force reflow ca animațiile să se restarteze
+    void heroVisual.offsetWidth;
+
+    // Calculează pentru fiecare sparkle: poziția lui curentă în coordonate relative
+    sparkles.forEach((sparkle, i) => {
+      const sparkleRect = sparkle.getBoundingClientRect();
+      // Centrul sparkle-ului relativ la hero-visual
+      const sparkleX = sparkleRect.left - visualRect.left + sparkleRect.width / 2;
+      const sparkleY = sparkleRect.top - visualRect.top + sparkleRect.height / 2;
+
+      // Aleg bagheta cea mai apropiată
+      const distLeft = Math.hypot(sparkleX - wandLeft.x, sparkleY - wandLeft.y);
+      const distRight = Math.hypot(sparkleX - wandRight.x, sparkleY - wandRight.y);
+      const wand = distLeft < distRight ? wandLeft : wandRight;
+
+      // Offset-ul de la baghetă la poziția sparkle-ului (= unde trebuie să "plece" sparkle)
+      const dx = wand.x - sparkleX;
+      const dy = wand.y - sparkleY;
+
+      sparkle.style.setProperty('--dx', dx + 'px');
+      sparkle.style.setProperty('--dy', dy + 'px');
+
+      // Delay scalonat: cu cât sparkle e mai departe, cu atât pleacă mai târziu
+      // Plus puțin random ca să nu fie prea mecanic
+      const baseDelay = 0.3 + (i * 0.04);
+      const randomJitter = (Math.random() - 0.5) * 0.1;
+      sparkle.style.animationDelay = (baseDelay + randomJitter) + 's';
+
+      sparkle.classList.add('cast');
+
+      // După animație, trec în twinkle continuu
+      const animDuration = 2.4;
+      setTimeout(() => {
+        sparkle.classList.remove('cast');
+        sparkle.classList.add('twinkling');
+        sparkle.style.animationDelay = (Math.random() * 2) + 's';
+      }, (baseDelay + randomJitter + animDuration) * 1000);
+    });
+
+    // Activează glow-ul baghetelor cu mic delay (sincron cu sparkles)
+    setTimeout(() => {
+      glowLeft.classList.add('active');
+      glowRight.classList.add('active');
+    }, 250);
+  }
+
+  // Lansează vraja la încărcarea paginii (după ce DOM-ul e gata)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(castMagicSpell, 600));
+  } else {
+    setTimeout(castMagicSpell, 600);
+  }
+
+  // Re-cast la hover pe logo (cu debounce ca să nu spamăm)
+  let castInProgress = false;
+  document.querySelector('.hero-logo-wrap')?.addEventListener('mouseenter', () => {
+    if (castInProgress) return;
+    castInProgress = true;
+    castMagicSpell();
+    setTimeout(() => { castInProgress = false; }, 3500);
   });
 </script>
 </body>
