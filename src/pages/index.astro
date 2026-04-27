@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const description =
-  'Afterschool privat în Novaci, Gorj pentru clasele 0-IV. Calitate, nu cantitate. Sprijin la teme, masă caldă, activități tematice (engleză, art & craft, dezvoltare personală) și meditații. 1.350 lei / an școlar.';
+  'Afterschool privat din Novaci, Gorj pentru clasele 0-IV. Calitate, nu cantitate. Sprijin la teme, masă caldă, activități tematice (engleză, art & craft, dezvoltare personală) și meditații. 1.350 lei / an școlar.';
 ---
 
 <BaseLayout
@@ -654,75 +654,9 @@ const description =
 
 <script>
   // ═══════════════════════════════════════════════
-  // 🔊 SUNET MAGIC
-  // ═══════════════════════════════════════════════
-  function playMagicSound() {
-    try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-      if (!AudioContextClass) return;
-
-      const ctx = new AudioContextClass();
-      const now = ctx.currentTime;
-      const master = ctx.createGain();
-      master.gain.value = 0.15;
-      master.connect(ctx.destination);
-
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.value = 8000;
-      filter.connect(master);
-
-      const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98, 2093.00];
-      notes.forEach((freq, i) => {
-        const startTime = now + (i * 0.08);
-        const osc = ctx.createOscillator();
-        osc.type = 'sine';
-        osc.frequency.value = freq;
-        const env = ctx.createGain();
-        env.gain.setValueAtTime(0, startTime);
-        env.gain.linearRampToValueAtTime(0.5, startTime + 0.02);
-        env.gain.exponentialRampToValueAtTime(0.001, startTime + 0.7);
-        osc.connect(env);
-        env.connect(filter);
-        osc.start(startTime);
-        osc.stop(startTime + 0.7);
-
-        const osc2 = ctx.createOscillator();
-        osc2.type = 'triangle';
-        osc2.frequency.value = freq * 2;
-        const env2 = ctx.createGain();
-        env2.gain.setValueAtTime(0, startTime);
-        env2.gain.linearRampToValueAtTime(0.15, startTime + 0.02);
-        env2.gain.exponentialRampToValueAtTime(0.001, startTime + 0.5);
-        osc2.connect(env2);
-        env2.connect(filter);
-        osc2.start(startTime);
-        osc2.stop(startTime + 0.5);
-      });
-
-      setTimeout(() => {
-        const finalOsc = ctx.createOscillator();
-        finalOsc.type = 'sine';
-        finalOsc.frequency.value = 2637;
-        const finalEnv = ctx.createGain();
-        const finalNow = ctx.currentTime;
-        finalEnv.gain.setValueAtTime(0, finalNow);
-        finalEnv.gain.linearRampToValueAtTime(0.4, finalNow + 0.01);
-        finalEnv.gain.exponentialRampToValueAtTime(0.001, finalNow + 1.2);
-        finalOsc.connect(finalEnv);
-        finalEnv.connect(filter);
-        finalOsc.start(finalNow);
-        finalOsc.stop(finalNow + 1.2);
-      }, notes.length * 80);
-    } catch (e) {
-      console.log('Audio not available:', e);
-    }
-  }
-
-  // ═══════════════════════════════════════════════
   // 🪄 ANIMAȚIA DE VRAJĂ
   // ═══════════════════════════════════════════════
-  function castMagicSpell(triggerLogoTremor = false, withSound = false) {
+  function castMagicSpell(triggerLogoTremor = false) {
     const heroVisual = document.querySelector<HTMLElement>('.hero-visual');
     const logoWrap = document.querySelector<HTMLElement>('.hero-logo-wrap');
     const sparkles = document.querySelectorAll<HTMLElement>('.sparkle');
@@ -730,8 +664,6 @@ const description =
     const glowRight = document.getElementById('wandGlowRight');
 
     if (!heroVisual || !logoWrap || sparkles.length === 0 || !glowLeft || !glowRight) return;
-
-    if (withSound) playMagicSound();
 
     if (triggerLogoTremor) {
       logoWrap.classList.remove('casting');
@@ -795,28 +727,14 @@ const description =
     }, 250);
   }
 
-  // Lansare la încărcare (fără sunet — autoplay blocat)
+  // Lansare la încărcare
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => castMagicSpell(true, false), 1500);
+      setTimeout(() => castMagicSpell(true), 1500);
     });
   } else {
-    setTimeout(() => castMagicSpell(true, false), 1500);
+    setTimeout(() => castMagicSpell(true), 1500);
   }
-
-  // Sunet la prima interacțiune
-  let firstInteraction = true;
-  function onFirstInteraction() {
-    if (!firstInteraction) return;
-    firstInteraction = false;
-    playMagicSound();
-    document.removeEventListener('click', onFirstInteraction);
-    document.removeEventListener('keydown', onFirstInteraction);
-    document.removeEventListener('touchstart', onFirstInteraction);
-  }
-  document.addEventListener('click', onFirstInteraction);
-  document.addEventListener('keydown', onFirstInteraction);
-  document.addEventListener('touchstart', onFirstInteraction);
 
   // Fade-up on scroll
   const observer = new IntersectionObserver((entries) => {
