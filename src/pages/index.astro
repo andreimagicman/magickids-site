@@ -25,6 +25,14 @@ const description =
             Locuri limitate pentru 2026–2027
           </div>
 
+          <a href="/program/" class="summer-banner fade-up delay-1">
+            <span class="summer-banner-text">
+              <span class="summer-banner-emoji" aria-hidden="true">🌞</span>
+              <span><strong>Program de vară disponibil!</strong> Înscrieri deschise pentru iulie–septembrie 2026</span>
+            </span>
+            <span class="summer-banner-cta">Află mai mult →</span>
+          </a>
+
           <h1 class="fade-up delay-1">
             Unde copiii<br />tăi <em>strălucesc</em><br />în fiecare zi
           </h1>
@@ -248,6 +256,49 @@ const description =
     color: var(--blue);
     margin-bottom: 24px;
     box-shadow: var(--shadow);
+  }
+
+  .summer-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: linear-gradient(135deg, var(--teal), var(--blue));
+    color: var(--white);
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(63,189,174,.28);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .summer-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(63,189,174,.36);
+  }
+  .summer-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .92rem;
+    line-height: 1.4;
+  }
+  .summer-banner-text strong { font-weight: 800; }
+  .summer-banner-emoji { font-size: 1.5rem; flex-shrink: 0; }
+  .summer-banner-cta {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: .9rem;
+    white-space: nowrap;
+    background: rgba(255,255,255,.2);
+    padding: 7px 16px;
+    border-radius: 50px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 520px) {
+    .summer-banner { padding: 14px 16px; }
+    .summer-banner-cta { width: 100%; text-align: center; }
   }
 
   h1 {

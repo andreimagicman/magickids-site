@@ -1,0 +1,400 @@
+---
+// Modal de lead generation pentru programul de vară.
+// Se include o singură dată pe pagină. Orice element cu atributul
+// [data-open-summer-modal] deschide modalul la click.
+---
+
+<div class="summer-modal" id="summerModal" role="dialog" aria-modal="true" aria-labelledby="summerModalTitle" aria-hidden="true">
+  <div class="summer-modal-overlay" data-close-summer-modal></div>
+
+  <div class="summer-modal-box">
+    <button type="button" class="summer-modal-close" aria-label="Închide" data-close-summer-modal>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+
+    <!-- FORMULAR -->
+    <div class="summer-modal-form-wrap" id="summerFormWrap">
+      <span class="summer-modal-tag">🌞 Program de vară</span>
+      <h2 id="summerModalTitle" class="summer-modal-title">Primește oferta personalizată</h2>
+      <p class="summer-modal-sub">Completează datele și îți trimitem rapid varianta potrivită pentru copilul tău.</p>
+
+      <form id="summerForm" novalidate>
+        <div class="summer-field">
+          <label for="summerName">Numele tău (al părintelui)</label>
+          <input type="text" id="summerName" name="name" autocomplete="name" required placeholder="Ex: Maria Popescu" />
+        </div>
+
+        <div class="summer-field">
+          <label for="summerPhone">Număr de telefon</label>
+          <input type="tel" id="summerPhone" name="phone" autocomplete="tel" required placeholder="Ex: 07xx xxx xxx" />
+        </div>
+
+        <div class="summer-field">
+          <label for="summerClass">Clasa copilului</label>
+          <select id="summerClass" name="class" required>
+            <option value="">Alege clasa…</option>
+            <option value="Pregătitoare/0">Pregătitoare / 0</option>
+            <option value="I">Clasa I</option>
+            <option value="II">Clasa a II-a</option>
+            <option value="III">Clasa a III-a</option>
+            <option value="IV">Clasa a IV-a</option>
+          </select>
+        </div>
+
+        <fieldset class="summer-field summer-variants">
+          <legend>Ce variantă te interesează?</legend>
+
+          <label class="summer-radio">
+            <input type="radio" name="variant" value="abonament" required />
+            <span class="summer-radio-mark" aria-hidden="true"></span>
+            <span class="summer-radio-text"><strong>Abonament lunar</strong><small>08:00 – 16:00</small></span>
+          </label>
+
+          <label class="summer-radio">
+            <input type="radio" name="variant" value="zilnic4" />
+            <span class="summer-radio-mark" aria-hidden="true"></span>
+            <span class="summer-radio-text"><strong>Zilnic — 4 ore</strong><small>08:00 – 12:00</small></span>
+          </label>
+
+          <label class="summer-radio">
+            <input type="radio" name="variant" value="zilnic5" />
+            <span class="summer-radio-mark" aria-hidden="true"></span>
+            <span class="summer-radio-text"><strong>Zilnic — 5 ore cu masă</strong><small>08:00 – 13:00</small></span>
+          </label>
+
+          <label class="summer-radio">
+            <input type="radio" name="variant" value="zilnic8" />
+            <span class="summer-radio-mark" aria-hidden="true"></span>
+            <span class="summer-radio-text"><strong>Zilnic — 8 ore cu masă</strong><small>08:00 – 16:00</small></span>
+          </label>
+
+          <label class="summer-radio">
+            <input type="radio" name="variant" value="nustiu" />
+            <span class="summer-radio-mark" aria-hidden="true"></span>
+            <span class="summer-radio-text"><strong>Nu știu încă, vreau să fiu contactat</strong></span>
+          </label>
+        </fieldset>
+
+        <p class="summer-error" id="summerError" hidden>Te rugăm să completezi toate câmpurile.</p>
+
+        <button type="submit" class="btn btn-primary summer-submit" id="summerSubmit">Trimite →</button>
+      </form>
+    </div>
+
+    <!-- MESAJ DE SUCCES -->
+    <div class="summer-modal-success" id="summerSuccess" hidden>
+      <div class="summer-success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <p class="summer-success-msg" id="summerSuccessMsg"></p>
+      <button type="button" class="btn btn-outline summer-success-close" data-close-summer-modal>Închide</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const modal = document.getElementById('summerModal');
+    if (!modal) return;
+
+    const form = document.getElementById('summerForm');
+    const formWrap = document.getElementById('summerFormWrap');
+    const success = document.getElementById('summerSuccess');
+    const successMsg = document.getElementById('summerSuccessMsg');
+    const errorEl = document.getElementById('summerError');
+    const submitBtn = document.getElementById('summerSubmit');
+    let lastFocused = null;
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const firstInput = document.getElementById('summerName');
+      if (firstInput) setTimeout(() => firstInput.focus(), 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    document.querySelectorAll('[data-open-summer-modal]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    modal.querySelectorAll('[data-close-summer-modal]').forEach((el) => {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    const MESSAGES = {
+      abonament: (n) => `Bună ${n}! Abonamentul lunar pentru programul de vară este 1.650 lei/lună și include program complet 08:00-16:00 cu masă. Te contactăm în maxim 24h!`,
+      zilnic4: (n) => `Bună ${n}! Tariful pentru 4 ore (08:00-12:00) este 45 lei/zi. Te contactăm în maxim 24h!`,
+      zilnic5: (n) => `Bună ${n}! Tariful pentru 5 ore cu masă inclusă (08:00-13:00) este 65 lei/zi. Te contactăm în maxim 24h!`,
+      zilnic8: (n) => `Bună ${n}! Tariful pentru programul complet cu masă (08:00-16:00) este 90 lei/zi. Te contactăm în maxim 24h!`,
+      nustiu: (n) => `Bună ${n}! Am înregistrat cererea ta. Te sunăm în maxim 24h să îți prezentăm toate opțiunile!`,
+    };
+
+    const VARIANT_LABELS = {
+      abonament: 'Abonament lunar (08:00-16:00)',
+      zilnic4: 'Zilnic 4 ore (08:00-12:00)',
+      zilnic5: 'Zilnic 5 ore cu masă (08:00-13:00)',
+      zilnic8: 'Zilnic 8 ore cu masă (08:00-16:00)',
+      nustiu: 'Nu știe încă — dorește să fie contactat',
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = (data.get('name') || '').toString().trim();
+      const phone = (data.get('phone') || '').toString().trim();
+      const childClass = (data.get('class') || '').toString().trim();
+      const variant = (data.get('variant') || '').toString().trim();
+
+      if (!name || !phone || !childClass || !variant) {
+        errorEl.hidden = false;
+        return;
+      }
+      errorEl.hidden = true;
+
+      // Trimite datele către Web3Forms (nu blocăm UX pe răspuns).
+      const firstName = name.split(' ')[0];
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Se trimite…';
+
+      try {
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: '', // TODO: add Web3Forms key
+            subject: 'Cerere ofertă program vară — Magic Kids',
+            'Nume părinte': name,
+            Telefon: phone,
+            'Clasa copilului': childClass,
+            Varianta: VARIANT_LABELS[variant] || variant,
+          }),
+        });
+      } catch (err) {
+        // Ignorăm erorile de rețea — afișăm oricum confirmarea către părinte.
+      }
+
+      const build = MESSAGES[variant] || MESSAGES.nustiu;
+      successMsg.textContent = build(firstName);
+      formWrap.hidden = true;
+      success.hidden = false;
+    });
+  })();
+</script>
+
+<style>
+  .summer-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .summer-modal.is-open { display: flex; }
+
+  .summer-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 37, 63, .55);
+    backdrop-filter: blur(3px);
+    animation: summerFade .2s ease;
+  }
+  @keyframes summerFade { from { opacity: 0; } to { opacity: 1; } }
+
+  .summer-modal-box {
+    position: relative;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px 36px 32px;
+    border-top: 6px solid var(--teal);
+    animation: summerPop .25s cubic-bezier(.22, 1, .36, 1);
+  }
+  @keyframes summerPop {
+    from { opacity: 0; transform: translateY(16px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .summer-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(20, 37, 63, .06);
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s;
+  }
+  .summer-modal-close:hover { background: rgba(20, 37, 63, .12); }
+  .summer-modal-close svg { width: 18px; height: 18px; }
+
+  .summer-modal-tag {
+    display: inline-block;
+    background: rgba(63, 189, 174, .15);
+    color: #2a8a7e;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .78rem;
+    letter-spacing: .04em;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+  }
+  .summer-modal-title {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .summer-modal-sub {
+    font-size: .92rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 22px;
+  }
+
+  .summer-field { margin-bottom: 16px; }
+  .summer-field > label,
+  .summer-variants legend {
+    display: block;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .88rem;
+    color: var(--navy);
+    margin-bottom: 7px;
+  }
+  .summer-field input[type="text"],
+  .summer-field input[type="tel"],
+  .summer-field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid rgba(20, 37, 63, .14);
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: .95rem;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .summer-field input:focus,
+  .summer-field select:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(63, 189, 174, .18);
+  }
+
+  .summer-variants {
+    border: none;
+    padding: 0;
+    margin: 0 0 18px;
+  }
+  .summer-radio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1.5px solid rgba(20, 37, 63, .12);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .summer-radio:hover { border-color: rgba(63, 189, 174, .5); }
+  .summer-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .summer-radio-mark {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(20, 37, 63, .25);
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color .15s;
+  }
+  .summer-radio input:checked ~ .summer-radio-mark {
+    border-color: var(--teal);
+  }
+  .summer-radio input:checked ~ .summer-radio-mark::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+  .summer-radio:has(input:checked) {
+    border-color: var(--teal);
+    background: rgba(63, 189, 174, .07);
+  }
+  .summer-radio input:focus-visible ~ .summer-radio-mark {
+    box-shadow: 0 0 0 3px rgba(63, 189, 174, .25);
+  }
+  .summer-radio-text { display: flex; flex-direction: column; line-height: 1.3; }
+  .summer-radio-text strong { font-size: .92rem; color: var(--text); font-weight: 700; }
+  .summer-radio-text small { font-size: .78rem; color: var(--muted); }
+
+  .summer-error {
+    color: var(--magenta);
+    font-size: .85rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+
+  .summer-submit {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.05rem;
+  }
+  .summer-submit:disabled { opacity: .7; cursor: default; transform: none; }
+
+  /* SUCCESS */
+  .summer-modal-success { text-align: center; padding: 12px 0 8px; }
+  .summer-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--teal);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .summer-success-icon svg { width: 30px; height: 30px; }
+  .summer-success-msg {
+    font-size: 1.05rem;
+    color: var(--navy);
+    line-height: 1.6;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 520px) {
+    .summer-modal-box { padding: 36px 22px 26px; }
+    .summer-modal-title { font-size: 1.3rem; }
+  }
+</style>

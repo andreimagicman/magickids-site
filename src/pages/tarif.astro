@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SummerLeadModal from '../components/SummerLeadModal.astro';
 
 const breadcrumbs = [
   { name: 'Acasă', url: '/' },
@@ -65,6 +66,13 @@ const breadcrumbs = [
         </div>
       </div>
 
+      <div class="summer-tarif-card">
+        <span class="summer-tarif-tag">🌞 Nou — Program de vară 2026</span>
+        <h2 class="summer-tarif-title">Program de vară — iulie–septembrie</h2>
+        <p class="summer-tarif-desc">Avem mai multe variante: abonament lunar sau tarif zilnic (4, 5 sau 8 ore, cu sau fără masă). Spune-ne ce te interesează și îți trimitem oferta personalizată pentru copilul tău.</p>
+        <button type="button" class="btn btn-primary summer-tarif-btn" data-open-summer-modal>Primește oferta personalizată →</button>
+      </div>
+
       <div class="other-services">
         <h2>Alte servicii (preț la cerere)</h2>
         <div class="other-services-grid">
@@ -87,6 +95,8 @@ const breadcrumbs = [
       </div>
     </div>
   </section>
+
+  <SummerLeadModal />
 </BaseLayout>
 
 <style>
@@ -273,6 +283,45 @@ const breadcrumbs = [
     margin-top: 18px;
     font-style: italic;
   }
+
+  /* Program de vară */
+  .summer-tarif-card {
+    max-width: 760px;
+    margin: 0 auto 60px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(63,189,174,.12), rgba(43,179,224,.08)), var(--white);
+    border: 2px solid rgba(63,189,174,.35);
+    border-radius: 28px;
+    padding: 44px 40px;
+    box-shadow: var(--shadow);
+  }
+  .summer-tarif-tag {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .04em;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+  }
+  .summer-tarif-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .summer-tarif-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto 28px;
+  }
+  .summer-tarif-btn { font-size: 1.1rem; }
 
   /* Alte servicii */
   .other-services {

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SummerLeadModal from '../components/SummerLeadModal.astro';
 
 const breadcrumbs = [
   { name: 'Acasă', url: '/' },
@@ -141,6 +142,45 @@ const breadcrumbs = [
       </div>
     </div>
   </section>
+
+  <!-- SUMMER PROGRAM -->
+  <section id="program-vara">
+    <div class="container">
+      <article class="summer-card">
+        <div class="summer-card-glow" aria-hidden="true"></div>
+        <div class="summer-card-content">
+          <span class="summer-card-tag">🌞 Nou pentru 2026</span>
+          <h2 class="summer-card-title">Program de Vară</h2>
+          <p class="summer-card-lead">O vară plină de joacă, prieteni și activități recreative — fără teme școlare. Copilul tău petrece zilele într-un mediu sigur, supravegheat și plin de bucurie.</p>
+
+          <div class="summer-features">
+            <div class="summer-feature">
+              <span class="summer-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <div><strong>Orar</strong><span>08:00 – 16:00</span></div>
+            </div>
+            <div class="summer-feature">
+              <span class="summer-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+              </span>
+              <div><strong>Perioada</strong><span>1 iulie – 15 septembrie 2026</span></div>
+            </div>
+            <div class="summer-feature">
+              <span class="summer-feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </span>
+              <div><strong>Activități recreative</strong><span>Fără teme școlare</span></div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-primary summer-card-btn" data-open-summer-modal>Primește oferta personalizată →</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <SummerLeadModal />
 </BaseLayout>
 
 <style>
@@ -312,9 +352,110 @@ const breadcrumbs = [
     line-height: 1.55;
   }
 
+  /* SUMMER PROGRAM */
+  #program-vara { padding: 0 0 90px; background: var(--cream); }
+  .summer-card {
+    position: relative;
+    max-width: 920px;
+    margin: 0 auto;
+    border-radius: 32px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--teal), var(--blue));
+    box-shadow: var(--shadow-lg);
+  }
+  .summer-card-glow {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(255,217,61,.35) 0%, transparent 45%),
+      radial-gradient(circle at 10% 90%, rgba(255,255,255,.25) 0%, transparent 50%);
+    z-index: 0;
+  }
+  .summer-card-content {
+    position: relative;
+    z-index: 1;
+    padding: 56px 48px;
+    text-align: center;
+    color: var(--white);
+  }
+  .summer-card-tag {
+    display: inline-block;
+    background: rgba(255,255,255,.22);
+    color: var(--white);
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .82rem;
+    letter-spacing: .04em;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(4px);
+  }
+  .summer-card-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .summer-card-lead {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,.92);
+    max-width: 620px;
+    margin: 0 auto 36px;
+  }
+  .summer-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 720px;
+    margin: 0 auto 40px;
+  }
+  .summer-feature {
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 16px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(4px);
+  }
+  .summer-feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.22);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .summer-feature-icon svg { width: 22px; height: 22px; }
+  .summer-feature div { display: flex; flex-direction: column; gap: 3px; }
+  .summer-feature strong {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: .95rem;
+    font-weight: 800;
+    color: var(--white);
+  }
+  .summer-feature span {
+    font-size: .85rem;
+    color: rgba(255,255,255,.88);
+    line-height: 1.4;
+  }
+  .summer-card-btn {
+    font-size: 1.1rem;
+    box-shadow: 0 10px 30px rgba(230,59,140,.4);
+  }
+
   /* RESPONSIVE */
   @media (max-width: 900px) {
     .program-grid { grid-template-columns: 1fr; gap: 40px; }
+    .summer-features { grid-template-columns: 1fr; max-width: 380px; }
+    .summer-card-content { padding: 44px 26px; }
     .weekly-grid { grid-template-columns: repeat(2, 1fr); }
     .schedule-row { padding: 12px 20px; }
     .sched-time { min-width: 70px; font-size: .9rem; }
