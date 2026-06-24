@@ -1,0 +1,399 @@
+---
+// Modal de lead generation pentru oferta de afterschool (an școlar).
+// Se include o singură dată pe pagină. Orice element cu atributul
+// [data-open-offer-modal] deschide modalul la click.
+---
+
+<div class="offer-modal" id="offerModal" role="dialog" aria-modal="true" aria-labelledby="offerModalTitle" aria-hidden="true">
+  <div class="offer-modal-overlay" data-close-offer-modal></div>
+
+  <div class="offer-modal-box">
+    <button type="button" class="offer-modal-close" aria-label="Închide" data-close-offer-modal>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+
+    <!-- FORMULAR -->
+    <div class="offer-modal-form-wrap" id="offerFormWrap">
+      <span class="offer-modal-tag">✦ Anul școlar 2026–2027</span>
+      <h2 id="offerModalTitle" class="offer-modal-title">Primește oferta personalizată</h2>
+      <p class="offer-modal-sub">Completează datele și îți trimitem rapid oferta potrivită pentru copilul tău.</p>
+
+      <form id="offerForm" novalidate>
+        <div class="offer-field">
+          <label for="offerName">Numele tău (al părintelui)</label>
+          <input type="text" id="offerName" name="name" autocomplete="name" required placeholder="Ex: Maria Popescu" />
+        </div>
+
+        <div class="offer-field">
+          <label for="offerPhone">Număr de telefon</label>
+          <input type="tel" id="offerPhone" name="phone" autocomplete="tel" required placeholder="Ex: 07xx xxx xxx" />
+        </div>
+
+        <div class="offer-field">
+          <label for="offerClass">Clasa copilului</label>
+          <select id="offerClass" name="class" required>
+            <option value="">Alege clasa…</option>
+            <option value="Pregătitoare/0">Pregătitoare / 0</option>
+            <option value="I">Clasa I</option>
+            <option value="II">Clasa a II-a</option>
+            <option value="III">Clasa a III-a</option>
+            <option value="IV">Clasa a IV-a</option>
+          </select>
+        </div>
+
+        <fieldset class="offer-field offer-variants">
+          <legend>Ce te interesează?</legend>
+
+          <label class="offer-radio">
+            <input type="radio" name="variant" value="afterschool" required />
+            <span class="offer-radio-mark" aria-hidden="true"></span>
+            <span class="offer-radio-text"><strong>Afterschool complet</strong><small>Luni–Vineri, 12:00–17:00</small></span>
+          </label>
+
+          <label class="offer-radio">
+            <input type="radio" name="variant" value="meditatii" />
+            <span class="offer-radio-mark" aria-hidden="true"></span>
+            <span class="offer-radio-text"><strong>Meditații</strong><small>Română și matematică</small></span>
+          </label>
+
+          <label class="offer-radio">
+            <input type="radio" name="variant" value="engleza" />
+            <span class="offer-radio-mark" aria-hidden="true"></span>
+            <span class="offer-radio-text"><strong>Doar limba engleză</strong><small>Curs separat</small></span>
+          </label>
+
+          <label class="offer-radio">
+            <input type="radio" name="variant" value="optionale" />
+            <span class="offer-radio-mark" aria-hidden="true"></span>
+            <span class="offer-radio-text"><strong>Activități opționale</strong><small>Plată per activitate</small></span>
+          </label>
+
+          <label class="offer-radio">
+            <input type="radio" name="variant" value="nustiu" />
+            <span class="offer-radio-mark" aria-hidden="true"></span>
+            <span class="offer-radio-text"><strong>Nu știu încă, vreau să fiu contactat</strong></span>
+          </label>
+        </fieldset>
+
+        <p class="offer-error" id="offerError" hidden>Te rugăm să completezi toate câmpurile.</p>
+
+        <button type="submit" class="btn btn-primary offer-submit" id="offerSubmit">Trimite →</button>
+      </form>
+    </div>
+
+    <!-- MESAJ DE SUCCES -->
+    <div class="offer-modal-success" id="offerSuccess" hidden>
+      <div class="offer-success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <p class="offer-success-msg" id="offerSuccessMsg"></p>
+      <button type="button" class="btn btn-outline offer-success-close" data-close-offer-modal>Închide</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const modal = document.getElementById('offerModal');
+    if (!modal) return;
+
+    const form = document.getElementById('offerForm');
+    const formWrap = document.getElementById('offerFormWrap');
+    const success = document.getElementById('offerSuccess');
+    const successMsg = document.getElementById('offerSuccessMsg');
+    const errorEl = document.getElementById('offerError');
+    const submitBtn = document.getElementById('offerSubmit');
+    let lastFocused = null;
+
+    function openModal() {
+      lastFocused = document.activeElement;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const firstInput = document.getElementById('offerName');
+      if (firstInput) setTimeout(() => firstInput.focus(), 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+
+    document.querySelectorAll('[data-open-offer-modal]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    modal.querySelectorAll('[data-close-offer-modal]').forEach((el) => {
+      el.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    const MESSAGES = {
+      afterschool: (n) => `Bună ${n}! Afterschool complet pentru anul școlar 2026–2027 este 1.350 lei / an, cu totul inclus (masă caldă, sprijin la teme și toate activitățile tematice). Ofertă specială, locuri limitate — te contactăm în maxim 24h!`,
+      meditatii: (n) => `Bună ${n}! Meditațiile la română și matematică au preț personalizat în funcție de pachet. Te contactăm în maxim 24h cu oferta!`,
+      engleza: (n) => `Bună ${n}! Cursul de limba engleză are tarif separat. Te contactăm în maxim 24h cu toate detaliile!`,
+      optionale: (n) => `Bună ${n}! Activitățile opționale se plătesc per activitate. Te sunăm în maxim 24h cu detaliile!`,
+      nustiu: (n) => `Bună ${n}! Am înregistrat cererea ta. Te sunăm în maxim 24h să îți prezentăm toate opțiunile!`,
+    };
+
+    const VARIANT_LABELS = {
+      afterschool: 'Afterschool complet (Luni–Vineri, 12:00–17:00)',
+      meditatii: 'Meditații română/matematică',
+      engleza: 'Doar limba engleză',
+      optionale: 'Activități opționale',
+      nustiu: 'Nu știe încă — dorește să fie contactat',
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = (data.get('name') || '').toString().trim();
+      const phone = (data.get('phone') || '').toString().trim();
+      const childClass = (data.get('class') || '').toString().trim();
+      const variant = (data.get('variant') || '').toString().trim();
+
+      if (!name || !phone || !childClass || !variant) {
+        errorEl.hidden = false;
+        return;
+      }
+      errorEl.hidden = true;
+
+      const firstName = name.split(' ')[0];
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Se trimite…';
+
+      try {
+        await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: '977fa2c3-5fd5-4a9c-a87e-f2f3a5b797ef',
+            subject: 'Cerere ofertă afterschool — Magic Kids',
+            'Nume părinte': name,
+            Telefon: phone,
+            'Clasa copilului': childClass,
+            Interes: VARIANT_LABELS[variant] || variant,
+          }),
+        });
+      } catch (err) {
+        // Ignorăm erorile de rețea — afișăm oricum confirmarea către părinte.
+      }
+
+      const build = MESSAGES[variant] || MESSAGES.nustiu;
+      successMsg.textContent = build(firstName);
+      formWrap.hidden = true;
+      success.hidden = false;
+    });
+  })();
+</script>
+
+<style>
+  .offer-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .offer-modal.is-open { display: flex; }
+
+  .offer-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 37, 63, .55);
+    backdrop-filter: blur(3px);
+    animation: offerFade .2s ease;
+  }
+  @keyframes offerFade { from { opacity: 0; } to { opacity: 1; } }
+
+  .offer-modal-box {
+    position: relative;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px 36px 32px;
+    border-top: 6px solid var(--magenta);
+    animation: offerPop .25s cubic-bezier(.22, 1, .36, 1);
+  }
+  @keyframes offerPop {
+    from { opacity: 0; transform: translateY(16px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .offer-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(20, 37, 63, .06);
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s;
+  }
+  .offer-modal-close:hover { background: rgba(20, 37, 63, .12); }
+  .offer-modal-close svg { width: 18px; height: 18px; }
+
+  .offer-modal-tag {
+    display: inline-block;
+    background: rgba(230, 59, 140, .12);
+    color: var(--magenta);
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .78rem;
+    letter-spacing: .04em;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+  }
+  .offer-modal-title {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .offer-modal-sub {
+    font-size: .92rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 22px;
+  }
+
+  .offer-field { margin-bottom: 16px; }
+  .offer-field > label,
+  .offer-variants legend {
+    display: block;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: .88rem;
+    color: var(--navy);
+    margin-bottom: 7px;
+  }
+  .offer-field input[type="text"],
+  .offer-field input[type="tel"],
+  .offer-field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid rgba(20, 37, 63, .14);
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: .95rem;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .offer-field input:focus,
+  .offer-field select:focus {
+    outline: none;
+    border-color: var(--magenta);
+    box-shadow: 0 0 0 3px rgba(230, 59, 140, .15);
+  }
+
+  .offer-variants {
+    border: none;
+    padding: 0;
+    margin: 0 0 18px;
+  }
+  .offer-radio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border: 1.5px solid rgba(20, 37, 63, .12);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .offer-radio:hover { border-color: rgba(230, 59, 140, .5); }
+  .offer-radio input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .offer-radio-mark {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(20, 37, 63, .25);
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color .15s;
+  }
+  .offer-radio input:checked ~ .offer-radio-mark {
+    border-color: var(--magenta);
+  }
+  .offer-radio input:checked ~ .offer-radio-mark::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--magenta);
+  }
+  .offer-radio:has(input:checked) {
+    border-color: var(--magenta);
+    background: rgba(230, 59, 140, .06);
+  }
+  .offer-radio input:focus-visible ~ .offer-radio-mark {
+    box-shadow: 0 0 0 3px rgba(230, 59, 140, .22);
+  }
+  .offer-radio-text { display: flex; flex-direction: column; line-height: 1.3; }
+  .offer-radio-text strong { font-size: .92rem; color: var(--text); font-weight: 700; }
+  .offer-radio-text small { font-size: .78rem; color: var(--muted); }
+
+  .offer-error {
+    color: var(--magenta);
+    font-size: .85rem;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+
+  .offer-submit {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.05rem;
+  }
+  .offer-submit:disabled { opacity: .7; cursor: default; transform: none; }
+
+  /* SUCCESS */
+  .offer-modal-success { text-align: center; padding: 12px 0 8px; }
+  .offer-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--magenta);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .offer-success-icon svg { width: 30px; height: 30px; }
+  .offer-success-msg {
+    font-size: 1.05rem;
+    color: var(--navy);
+    line-height: 1.6;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 520px) {
+    .offer-modal-box { padding: 36px 22px 26px; }
+    .offer-modal-title { font-size: 1.3rem; }
+  }
+</style>

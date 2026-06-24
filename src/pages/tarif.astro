@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SummerLeadModal from '../components/SummerLeadModal.astro';
+import OfferLeadModal from '../components/OfferLeadModal.astro';
 
 const breadcrumbs = [
   { name: 'Acasă', url: '/' },
@@ -9,8 +10,8 @@ const breadcrumbs = [
 ---
 
 <BaseLayout
-  title="Tarif Afterschool 1.350 lei / an școlar — Magic Kids Novaci"
-  description="Tariful Magic Kids Afterschool: 1.350 lei pentru întreg anul școlar 2026-2027. Include masă caldă, gustare, sprijin la teme, toate cele 5 activități tematice și comunicare cu părinții. Ofertă valabilă doar acest an."
+  title="Tarif Afterschool — Magic Kids Novaci"
+  description="Afterschool complet pentru anul școlar 2026–2027 la Magic Kids Novaci: masă caldă, gustare, sprijin la teme, toate cele 5 activități tematice și comunicare cu părinții. Cere oferta personalizată — îți răspundem în maxim 24h."
   pageName="Tarif"
   breadcrumbs={breadcrumbs}>
 
@@ -37,22 +38,10 @@ const breadcrumbs = [
               <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
-            Tarif fix • Anul școlar curent
+            Înscrieri deschise • Anul școlar 2026–2027
           </div>
           <h2 class="pricing-title">Afterschool Complet</h2>
-          <div class="price-display">
-            <span class="price-amount">1.350</span>
-            <div class="price-meta">
-              <span class="price-currency">LEI</span>
-              <span class="price-period">/ an școlar</span>
-            </div>
-          </div>
-          <div class="price-warning">
-            <span class="icon icon-md icon-orange" style="margin-right:6px; vertical-align:-3px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
-            </span>
-            <strong>Ofertă valabilă doar pentru anul școlar în curs.</strong> Începând cu noul an școlar, tariful va crește.
-          </div>
+          <p class="pricing-lead">Un singur tarif anual, totul inclus. Locuri limitate pentru anul școlar 2026–2027 — cere oferta personalizată și îți răspundem în maxim 24h.</p>
           <h3 class="includes-title">Ce este inclus:</h3>
           <ul class="price-includes">
             <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Toate zilele de afterschool (Luni–Vineri, 12:00–17:00)</li>
@@ -61,7 +50,7 @@ const breadcrumbs = [
             <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Toate cele 5 activități tematice săptămânale</li>
             <li><span class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Comunicare permanentă cu părinții</li>
           </ul>
-          <a href="/contact/#inscriere" class="btn btn-primary" style="font-size:1.1rem;">Rezervă un loc acum →</a>
+          <button type="button" class="btn btn-primary" style="font-size:1.1rem;" data-open-offer-modal>Primește oferta personalizată →</button>
           <p class="price-note">Meditațiile la română și matematică, precum și programul de Engleză sunt disponibile separat, contra cost.</p>
         </div>
       </div>
@@ -97,6 +86,7 @@ const breadcrumbs = [
   </section>
 
   <SummerLeadModal />
+  <OfferLeadModal />
 </BaseLayout>
 
 <style>
@@ -185,7 +175,14 @@ const breadcrumbs = [
     font-weight: 800;
     font-size: clamp(1.6rem, 3.5vw, 2.2rem);
     color: var(--navy);
-    margin-bottom: 24px;
+    margin-bottom: 16px;
+  }
+  .pricing-lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 28px;
   }
 
   .price-display {
