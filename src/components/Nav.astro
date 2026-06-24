@@ -4,6 +4,7 @@ const currentPath = Astro.url.pathname;
 const links = [
   { href: '/servicii/', label: 'Servicii' },
   { href: '/program/', label: 'Program' },
+  { href: '/program-vara/', label: 'Program vară 🌞', highlight: true },
   { href: '/tarif/', label: 'Tarif' },
   { href: '/contact/', label: 'Contact' },
   { href: '/blog/', label: 'Blog' },
@@ -34,9 +35,9 @@ function isActive(path: string) {
 
     <div class="nav-menu" id="navMenu">
       <ul class="nav-links" role="list">
-        {links.map(({ href, label }) => (
+        {links.map(({ href, label, highlight }) => (
           <li>
-            <a href={href} class:list={[{ active: isActive(href) }]} aria-current={isActive(href) ? 'page' : undefined}>
+            <a href={href} class:list={[{ active: isActive(href), 'nav-summer': highlight }]} aria-current={isActive(href) ? 'page' : undefined}>
               {label}
             </a>
           </li>
@@ -123,6 +124,11 @@ function isActive(path: string) {
   .nav-links a:hover::after { width: 100%; left: 0; }
   .nav-links a.active { color: var(--magenta); }
   .nav-links a.active::after { width: 100%; left: 0; }
+
+  .nav-links a.nav-summer { color: var(--teal); font-weight: 700; }
+  .nav-links a.nav-summer::after { background: var(--teal); }
+  .nav-links a.nav-summer:hover { color: var(--teal); }
+  .nav-links a.nav-summer.active { color: var(--teal); }
 
   .nav-cta {
     display: flex;
